@@ -433,6 +433,16 @@
             background: rgb(255, 255, 255) url("../img/icon_img/icon_4.png");
             background-size: cover;
         }
+
+        &[data-card='4'] {
+            background: rgb(255, 255, 255) url("../img/icon_img/icon_5.png");
+            background-size: cover;
+        }
+
+        &[data-card='5'] {
+            background: rgb(255, 255, 255) url("../img/icon_img/icon_6.png");
+            background-size: cover;
+        }
     }
 
     &.hidden-card {

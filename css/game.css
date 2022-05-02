@@ -885,6 +885,16 @@ body {
   background-size: cover;
 }
 
+.main__minigame--card.flip-card[data-card='4'] {
+  background: white url("../img/icon_img/icon_5.png");
+  background-size: cover;
+}
+
+.main__minigame--card.flip-card[data-card='5'] {
+  background: white url("../img/icon_img/icon_6.png");
+  background-size: cover;
+}
+
 .main__minigame--card.hidden-card {
   visibility: hidden;
 }

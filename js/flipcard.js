@@ -69,11 +69,18 @@ export default class flipCard {
     shuffleCard = () => {
         const shuffleNum = [...Array(36).keys()].sort(() => Math.random() - 0.5);
         // 36개의 카드를 4분할 하여, 각 범주에 해당되는 카드를 불러와 id를 할당시킴
-        for (let i = 0; i < shuffleNum.length; i += 9) {
-            const sameCardList = shuffleNum.slice(i, i + 9);
+        for (let i = 0; i < shuffleNum.length; i += 6) {
+            const sameCardList = shuffleNum.slice(i, i + 6);
             sameCardList.forEach(cardNum => {
-                cardList[cardNum].dataset.card = parseInt(i / 9);
-            })
+                cardList[cardNum].dataset.card = parseInt(i / 6);
+            });
         }
+    }
+
+    // 현재 필드에 남은 상태에 놓인 카드가 몇 장인지를 체크하는 함수
+    // 남은 카드의 수량이 0이라면 다음 스테이지로 이동하게끔 0을 리턴.
+    checkLeftCard = () => {
+        const leftCard = Array.from(cardList).filter(card => !card.classList.contains('hidden-card'));
+        return leftCard.length;
     }
 }

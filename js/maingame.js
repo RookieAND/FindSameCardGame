@@ -2,6 +2,10 @@ const startBtn = document.querySelector(".main__minigame--lobby button");
 const go2LobbyBtn = document.querySelector(".main__minigame--end button");
 
 const timeDisplay = document.querySelector('.minigame-status.time strong');
+
+const stageDisplay = document.querySelector('.minigame-status.stage strong');
+const resultStageDisplay = document.querySelector('.minigame-result.stage strong');
+
 const scoreDisplay = document.querySelector('.minigame-status.score strong');
 const resultScoreDisplay = document.querySelector('.minigame-result.score strong');
 
@@ -35,8 +39,12 @@ class GameStatue {
     }
 
     prepareNextStage() {
+        this.timeLeft = GAME_PLAYTIME;
         this.currentStage += 1;
         this.combo = 0;
+
+        timeDisplay.innerText = "60:00";
+        stageDisplay.innerText = this.currentStage;
     }
 
     endingGame() {
@@ -48,6 +56,7 @@ class GameStatue {
     
             this.isGameStart = false;
             resultScoreDisplay.innerText = this.score.toLocaleString("en-US");
+            resultStageDisplay.innerText = this.currentStage;
         }
     }
 
@@ -62,6 +71,7 @@ class GameStatue {
 
         scoreDisplay.innerText = this.score.toLocaleString("en-US");
         timeDisplay.innerText = "00:00"
+        stageDisplay.innerText = this.currentStage;
     }
 }
 
@@ -83,13 +93,36 @@ function startGame() {
     }, 3000);
 }
 
+// 다음 스테이지를 로드하기 전에, 전처리 과정을 진행하는 함수
+function gotoNextStage() {
+
+    gameObj.prepareNextStage();
+    gameCard.shuffleCard();
+    gameCard.defaultCardSet();
+
+    setTimeout(() => {
+        const gameTimeLeft = setInterval(() => {
+            if (checkgameStatue()) {clearInterval(gameTimeLeft)}
+            countTimeLeft();
+        }, 10);
+    }, 3000);
+}
+
 // 현재 시간이 얼마나 흘렀는지를 체크하고, 0초라면 즉시 게임을 종료 시킴.
 function checkgameStatue() {
+    
+    // 필드 위에 남은 카드가 0장이라면, 다음 스테이지를 로드함.
+    if (gameCard.checkLeftCard() == 0) {
+        gotoNextStage();
+        return true;
+    }
+
+    // 만약 시간이 초과되었다면, 게임을 종료하고 결과 창을 띄움.
     if (gameObj.timeLeft <= 0) {
-        clearInterval();
         gameObj.endingGame();
         return true;
     }
+
     return false;
 }
 
