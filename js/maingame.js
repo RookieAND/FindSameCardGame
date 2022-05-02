@@ -2,6 +2,7 @@ const startBtn = document.querySelector(".main__minigame--lobby button");
 const go2LobbyBtn = document.querySelector(".main__minigame--end button");
 
 const timeDisplay = document.querySelector('.minigame-status.time strong');
+const resultScoreDisplay = document.querySelector('.minigame-result.score strong');
 
 const gameStatus = document.querySelector(".main__minigame--status");
 const gameLobby = document.querySelector(".main__minigame--lobby");
@@ -9,41 +10,24 @@ const gameFrame = document.querySelector(".main__minigame--main");
 const gameEndLobby = document.querySelector(".main__minigame--end");
 
 import flipCard from "./flipcard.js";
-import flipCard from "./flipcard.js";
 
 class GameStatue {
     constructor() {
         this.isGameStart = false;
-        this.timeLeft = 5000;
+        this.timeLeft = 10000;
         this.currentStage = 1;
         this.score = 0;
         this.combo = 0;
-    }
-
-    // 0.1 초 단위로 남은 숫자를 제거하며 카운트를 진행시킴
-    countTimeLeft() {
-        const gameTimeLeft = setInterval(() => {
-            this.timeLeft -= 10;
-            const {timeSec, timeMilliSec} = {timeSec : parseInt(this.timeLeft / 1000), timeMilliSec : this.timeLeft - (timeSecond * 1000)};
-            timeDisplay.innerText = `${String(timeSec).padStart(2, "0")}:${String(timeMilliSec).slice(0, 2).padStart(2, "0")}`;
-
-            if (this.timeLeft <= 0) {
-                gameEnd();
-                clearInterval(gameTimeLeft);
-            }
-        }, 10);
     }
 
     runningGame() {
         if (!this.isGameStart) {
 
             this.isGameStart = true;
-            this.timeLeft = 5000;
+            this.timeLeft = 10000;
 
             gameLobby.classList.add('started');
             gameFrame.classList.remove('not-started');
-            // this.flipCard.defaultCardSet();
-            console.log(flipCard.defaultCardSet());
         }
     }
 
@@ -55,7 +39,7 @@ class GameStatue {
             gameStatus.classList.add('ended');
     
             this.isGameStart = false;
-            this.flipCard.resetCard();
+            gameCard.resetCard();
             resultScoreDisplay.innerText = this.score.toLocaleString("en-US");
         }
     }
@@ -68,7 +52,30 @@ class GameStatue {
 }
 
 const gameObj = new GameStatue();
-const flipCard = new flipCard(gameObj);
+const gameCard = new flipCard(gameObj);
 
-startBtn.addEventListener('click', gameObj.runningGame());
+// 시작 버튼을 눌렀을 경우, 자동으로 게임을 실행시켜야 함.
+function pressStartBtn() {
+    gameObj.runningGame();
+    gameCard.defaultCardSet();
+
+    const gameTimeLeft = setInterval(() => {
+        countTimeLeft()
+        if (gameObj.timeLeft < 0) {
+            clearInterval(gameTimeLeft);
+            gameObj.endingGame();
+            return;
+        }
+    }, 10);
+}
+
+// 0.1 초 단위로 남은 숫자를 제거하며 카운트를 진행시킴
+function countTimeLeft() {
+    gameObj.timeLeft -= 10;
+    const timeSec = parseInt(gameObj.timeLeft / 1000);
+    const timeMilliSec = gameObj.timeLeft - (timeSec * 1000);
+    timeDisplay.innerText = `${String(timeSec).padStart(2, "0")}:${String(timeMilliSec).slice(0, 2).padStart(2, "0")}`;
+}
+
+startBtn.addEventListener('click', pressStartBtn);
 go2LobbyBtn.addEventListener('click', gameObj.returnToLobby);
