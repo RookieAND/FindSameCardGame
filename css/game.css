@@ -90,9 +90,9 @@ body {
   padding: 0.5vw 2.5vw;
   background: -webkit-gradient(linear, left top, left bottom, from(#340086), to(#1e00a3));
   background: linear-gradient(#340086, #1e00a3);
-  border-radius: 30px;
-  -webkit-box-shadow: 0px 4px 3px rgba(21, 0, 78, 0.5);
-          box-shadow: 0px 4px 3px rgba(21, 0, 78, 0.5);
+  border-radius: 5vw;
+  -webkit-box-shadow: 0px 0.15vw 10px rgba(21, 0, 78, 0.5);
+          box-shadow: 0px 0.15vw 10px rgba(21, 0, 78, 0.5);
   font-size: 2.75vw;
   color: white;
   text-decoration: none;
@@ -823,7 +823,7 @@ body {
 }
 
 .main__minigame--main.not-started {
-  visibility: hidden;
+  display: none;
 }
 
 .main__minigame--card {
@@ -857,7 +857,6 @@ body {
 }
 
 .main__minigame--card.flip-card {
-  background-size: cover;
   -webkit-transform: rotateY(180deg);
           transform: rotateY(180deg);
   -webkit-transition: -webkit-transform .5s;
@@ -866,20 +865,24 @@ body {
   transition: transform .5s, -webkit-transform .5s;
 }
 
-.main__minigame--card.flip-card[data-card='1'] {
+.main__minigame--card.flip-card[data-card='0'] {
   background: white url("../img/icon_img/icon_1.png");
+  background-size: cover;
+}
+
+.main__minigame--card.flip-card[data-card='1'] {
+  background: white url("../img/icon_img/icon_2.png");
+  background-size: cover;
 }
 
 .main__minigame--card.flip-card[data-card='2'] {
-  background: white url("../img/icon_img/icon_2.png");
+  background: white url("../img/icon_img/icon_3.png");
+  background-size: cover;
 }
 
 .main__minigame--card.flip-card[data-card='3'] {
-  background: white url("../img/icon_img/icon_3.png");
-}
-
-.main__minigame--card.flip-card[data-card='4'] {
   background: white url("../img/icon_img/icon_4.png");
+  background-size: cover;
 }
 
 .main__minigame--card.hidden-card {

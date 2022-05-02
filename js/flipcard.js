@@ -7,14 +7,6 @@ export default class flipCard {
         this.lockSelect = false;
         this.gameStatue = GameStatue;
     }
-
-    // 모든 카드를 순회하여 뒤집어지거나 사라졌던 카드를 원상태로 복구시키는 함수
-    resetCard() {
-        cardList.forEach(card => {
-            if (card.classList.contains('hidden-card')) { card.classList.remove('hidden-card'); }
-            if (card.classList.contains('flip-card')) { card.classList.remove('flip-card'); }
-        });
-    }
     
     // 선택된 서로 다른 두 카드가 동일한지를 판별하는 함수.
     checkMatchCard() {
@@ -61,7 +53,27 @@ export default class flipCard {
     }
 
     // 게임이 새롭게 시작되었을 때, 각각의 카드를 초기화하고 이벤트를 할당시킴.
+    // + 모든 카드를 순회하여 뒤집어지거나 사라졌던 카드를 원상태로 복구시키는 함수
     defaultCardSet() {
-        cardList.forEach(card => card.addEventListener('click', this.flipCurrentCard));
+        cardList.forEach(card => {
+            card.addEventListener('click', this.flipCurrentCard);
+            if (card.classList.contains('hidden-card')) { card.classList.remove('hidden-card'); }
+            if (!card.classList.contains('flip-card')) { card.classList.add('flip-card'); }
+        });
+        // 3초 후 카드를 일괄적으로 다시 뒤집음. (잠시 보여준 후에 뒤집는 것)
+        setTimeout(() =>
+            cardList.forEach(card => card.classList.remove('flip-card')
+            ), 3000);
+    }
+
+    shuffleCard = () => {
+        const shuffleNum = [...Array(36).keys()].sort(() => Math.random() - 0.5);
+        // 36개의 카드를 4분할 하여, 각 범주에 해당되는 카드를 불러와 id를 할당시킴
+        for (let i = 0; i < shuffleNum.length; i += 9) {
+            const sameCardList = shuffleNum.slice(i, i + 9);
+            sameCardList.forEach(cardNum => {
+                cardList[cardNum].dataset.card = parseInt(i / 9);
+            })
+        }
     }
 }

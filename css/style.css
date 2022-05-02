@@ -90,9 +90,9 @@ body {
   padding: 0.5vw 2.5vw;
   background: -webkit-gradient(linear, left top, left bottom, from(#340086), to(#1e00a3));
   background: linear-gradient(#340086, #1e00a3);
-  border-radius: 30px;
-  -webkit-box-shadow: 0px 4px 3px rgba(21, 0, 78, 0.5);
-          box-shadow: 0px 4px 3px rgba(21, 0, 78, 0.5);
+  border-radius: 5vw;
+  -webkit-box-shadow: 0px 0.15vw 10px rgba(21, 0, 78, 0.5);
+          box-shadow: 0px 0.15vw 10px rgba(21, 0, 78, 0.5);
   font-size: 2.75vw;
   color: white;
   text-decoration: none;
