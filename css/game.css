@@ -627,7 +627,7 @@ body {
           box-shadow: 0px 0.25vw #0d0046;
   border: 0px;
   position: relative;
-  top: 20vw;
+  top: 16vw;
   left: 0vw;
   right: 0vw;
   margin: auto;
@@ -650,6 +650,83 @@ body {
 }
 
 .main__minigame--lobby.started {
+  display: none;
+}
+
+.main__minigame--next-stage {
+  width: 100vw;
+  height: 30vw;
+  color: white;
+  text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+  text-align: center;
+  position: relative;
+  top: 12vw;
+}
+
+.main__minigame--next-stage h4 {
+  height: 5.5vw;
+  margin: 0;
+  position: relative;
+  top: 8vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#2500aa), to(rgba(98, 0, 122, 0.9)));
+  background: linear-gradient(#2500aa, rgba(98, 0, 122, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px -4px white;
+  font-size: 7vw;
+}
+
+.main__minigame--next-stage h4:hover {
+  text-shadow: 0px -2px white;
+}
+
+.main__minigame--next-stage p {
+  margin: 0;
+  position: relative;
+  top: 9.5vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#2500aa), to(rgba(98, 0, 122, 0.9)));
+  background: linear-gradient(#2500aa, rgba(98, 0, 122, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px -2px white;
+  font-size: 2vw;
+  font-family: 'Black Han Sans', sans-serif;
+}
+
+.main__minigame--next-stage button {
+  width: 25vw;
+  height: 4vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#272aff), to(#ef3cff));
+  background: linear-gradient(#272aff, #ef3cff);
+  border-radius: 10vw;
+  -webkit-box-shadow: 0px 0.25vw #0d0046;
+          box-shadow: 0px 0.25vw #0d0046;
+  border: 0px;
+  position: relative;
+  top: 16vw;
+  left: 0vw;
+  right: 0vw;
+  margin: auto;
+  color: white;
+  font-size: 3vw;
+  text-shadow: 0px 7px 2px rgba(30, 0, 163, 0.75);
+  -webkit-transition: -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), -webkit-transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  top: 12vw;
+}
+
+.main__minigame--next-stage button i {
+  padding-right: 1vw;
+}
+
+.main__minigame--next-stage button:hover {
+  -webkit-transform: scale(105%);
+          transform: scale(105%);
+}
+
+.main__minigame--next-stage.not-completed {
   display: none;
 }
 

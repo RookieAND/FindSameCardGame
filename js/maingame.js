@@ -1,17 +1,18 @@
 const startBtn = document.querySelector(".main__minigame--lobby button");
 const go2LobbyBtn = document.querySelector(".main__minigame--end button");
+const go2NextStageBtn = document.querySelector(".main__minigame--next-stage button");
 
 const timeDisplay = document.querySelector('.minigame-status.time strong');
-
 const stageDisplay = document.querySelector('.minigame-status.stage strong');
-const resultStageDisplay = document.querySelector('.minigame-result.stage strong');
-
 const scoreDisplay = document.querySelector('.minigame-status.score strong');
+
+const resultStageDisplay = document.querySelector('.minigame-result.stage strong');
 const resultScoreDisplay = document.querySelector('.minigame-result.score strong');
 
 const gameStatus = document.querySelector(".main__minigame--status");
 const gameLobby = document.querySelector(".main__minigame--lobby");
 const gameFrame = document.querySelector(".main__minigame--main");
+const gameNextStage = document.querySelector(".main__minigame--next-stage");
 const gameEndLobby = document.querySelector(".main__minigame--end");
 
 const GAME_PLAYTIME = 60000;
@@ -39,12 +40,23 @@ class GameStatue {
     }
 
     prepareNextStage() {
-        this.timeLeft = GAME_PLAYTIME;
         this.currentStage += 1;
+        this.timeLeft += 20000;
         this.combo = 0;
 
-        timeDisplay.innerText = "60:00";
+        const timeSec = parseInt(gameObj.timeLeft / 1000);
+        const timeMilliSec = gameObj.timeLeft - (timeSec * 1000);
+
         stageDisplay.innerText = this.currentStage;
+        timeDisplay.innerText = `${String(timeSec).padStart(2, "0")}:${String(timeMilliSec).slice(0, 2).padStart(2, "0")}`;
+
+        gameFrame.classList.add('not-started');
+        gameNextStage.classList.remove('not-completed');
+    }
+
+    runningNextStage() {
+        gameFrame.classList.remove('not-started');
+        gameNextStage.classList.add('not-completed');
     }
 
     endingGame() {
@@ -95,8 +107,7 @@ function startGame() {
 
 // 다음 스테이지를 로드하기 전에, 전처리 과정을 진행하는 함수
 function gotoNextStage() {
-
-    gameObj.prepareNextStage();
+    gameObj.runningNextStage();
     gameCard.shuffleCard();
     gameCard.defaultCardSet();
 
@@ -113,7 +124,7 @@ function checkgameStatue() {
     
     // 필드 위에 남은 카드가 0장이라면, 다음 스테이지를 로드함.
     if (gameCard.checkLeftCard() == 0) {
-        gotoNextStage();
+        setTimeout(() => gameObj.prepareNextStage(), 500);
         return true;
     }
 
@@ -136,3 +147,4 @@ function countTimeLeft() {
 
 startBtn.addEventListener('click', startGame);
 go2LobbyBtn.addEventListener('click', gameObj.returnToLobby);
+go2NextStageBtn.addEventListener('click', gotoNextStage);

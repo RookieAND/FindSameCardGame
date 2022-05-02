@@ -15,19 +15,28 @@ export default class flipCard {
     }
     
     // 선택된 서로 다른 두 카드가 동일할 경우, 이를 제거하는 함수
-    hiddenMatchCard() {
+    hiddenMatchCard = () => {
         this.selectCard.forEach(card => {
             card.removeEventListener('click', this.flipCurrentCard);
             setTimeout(() => card.classList.add('hidden-card'), 500);
         });
-        this.gameStatue.score += (100 + this.gameStatue.combo * 10 + (this.gameStatue.currentStage - 1));
+
+        // 점수 : 기본 100 점 + 콤보 ^ 2 * 10 + (스테이지 - 1) | 시간 : 0.5초 + (콤보 - 1) ^ 2 * 0.05초
+        console.log(this.gameStatue.timeLeft);
+
+        this.gameStatue.score += 100 + ((this.gameStatue.combo - 1) ^ 2 * 10) + (this.gameStatue.currentStage - 1);
+        this.gameStatue.timeLeft += 50 + ((this.gameStatue.combo - 1) ^ 2 * 5) + (this.gameStatue.currentStage - 1);
         this.gameStatue.combo += 1;
+        console.log(this.gameStatue.timeLeft);
+
         scoreDisplay.innerText = this.gameStatue.score.toLocaleString("en-US")
     }
     
     // 선택한 두 카드가 동일하지 않을 경우 카드를 뒤집는 함수.
-    unfilpCard() {
+    unfilpCard = () => {
+        // 콤보를 0으로 초기화 하고, 점수를 10점 감점시킴 (감점 시 음수라면 0으로 고정)
         this.gameStatue.combo = 0;
+        this.gameStatue.score <= 10 ? this.gameStatue.score = 0 : this.gameStatue.score -= 10;
         this.selectCard.forEach(card => {
             setTimeout(() => card.classList.remove('flip-card'), 500);
         })
@@ -69,10 +78,10 @@ export default class flipCard {
     shuffleCard = () => {
         const shuffleNum = [...Array(36).keys()].sort(() => Math.random() - 0.5);
         // 36개의 카드를 4분할 하여, 각 범주에 해당되는 카드를 불러와 id를 할당시킴
-        for (let i = 0; i < shuffleNum.length; i += 6) {
-            const sameCardList = shuffleNum.slice(i, i + 6);
+        for (let i = 0; i < shuffleNum.length; i += 12) {
+            const sameCardList = shuffleNum.slice(i, i + 12);
             sameCardList.forEach(cardNum => {
-                cardList[cardNum].dataset.card = parseInt(i / 6);
+                cardList[cardNum].dataset.card = parseInt(i / 12);
             });
         }
     }
