@@ -1,0 +1,438 @@
+@import "style.scss";
+
+.main__mybest {
+    width: 100vw;
+    height: 30vw;
+
+    background: $color-space; 
+}
+
+.main__mybest--title {
+    color: $color-white;
+    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+    text-align: center;
+
+    position: relative;
+    top: 4vw;
+
+    h4 {
+        height: 5.5vw;
+        margin: 0;
+
+        font-size: 5.5vw;
+        text-shadow: 0px 3px rgb(30, 0, 163);
+
+        &:hover {
+            text-shadow: 0px 2px rgb(30, 0, 163);
+        }
+    }
+
+    p {
+        margin: 0;
+
+        font-size: 2vw;
+        font-family: 'Black Han Sans', sans-serif;
+        text-shadow: 0px 2px rgb(30, 0, 163);
+    }
+}
+
+.main__mybest--element {
+    width: 60vw;
+    height: 10vw;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: relative;
+    top: 7.5vw; left: 0vw; right: 0vw;
+    margin: auto;
+
+    .mybest--guide {
+        flex-basis: 15vw;
+        padding-top: 0.6vw;
+
+        background: $color-white; 
+        background-size: cover;
+        border-radius: 25px;
+        box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
+
+        text-align: center;
+        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        i {
+            @include space-gradient;
+            margin: 0vw auto 0.75vw auto;
+            font-size: 2vw;
+        }
+
+        span {
+            @include space-gradient;
+            display: block;
+            margin: 0vw auto;
+            
+            font-size: 1.5vw;
+        }
+
+        strong {
+            @include space-gradient;
+            width: 12vw;
+            margin: 0vw auto;
+
+            font-size: 3vw;
+        }
+
+        &:hover {
+            flex-basis: 17.5vw;
+            margin: 0vw 2vw;
+        }
+    }
+}
+
+.main__minigame {
+    width: 100vw;
+    height: 80vw;
+
+    background-image: url(../img/bg_img2.jpg);
+    background-size: cover;
+
+    color: rgb(255, 255, 2556);
+
+    text-align: center;
+}
+
+.main__minigame--title {
+    color: $color-white;
+    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+    text-align: center;
+
+    position: relative;
+    top: 4vw;
+
+    h4 {
+        height: 5.5vw;
+        margin: 0;
+
+        @include space-darken-gradient;
+        text-shadow: 0px -4px $color-white;
+        font-size: 5.5vw;
+
+        &:hover {
+            text-shadow: 0px -2px $color-white;
+        }
+    }
+
+    p {
+        margin: 0;
+
+        @include space-darken-gradient;
+        text-shadow: 0px -2px $color-white;
+        font-size: 2vw;
+        font-family: 'Black Han Sans', sans-serif;
+    }
+}
+
+.main__minigame--status {
+    width: 70vw;
+    height: 4vw;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: relative;
+    top: 7.5vw; left: 0vw; right: 0vw;
+    margin: auto;
+
+    background: $color-white; 
+    border-radius: 50px;
+    box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
+
+    .minigame-status {
+        flex-basis: 20vw;
+        height: 3vw;
+
+        @include space-darken-gradient;
+        vertical-align: middle;
+        transition: all 0.3s ease-out;
+
+        i {
+            @include space-gradient;
+            margin: 0vw auto 0.75vw auto;
+            font-size: 2.25vw;
+        }
+
+        span {
+            margin: 0vw 1vw 0.75vw 1vw;
+            font-size: 1.75vw;
+        }
+
+        strong {
+            font-size: 2.75vw;
+        }
+
+        &:hover {
+            flex-basis: 19vw;
+            margin: 0vw 2vw;
+        }
+    }
+
+    &.ended {
+        display: none;
+    }
+}
+
+.main__minigame--lobby {
+    width: 80vw;
+    height: 48vw;
+    padding: 0.5vw 0.75vw;
+
+    position: relative;
+    top: 5vw; left: 0vw; right: 0vw;
+    margin: auto;
+
+    h4 {
+        height: 5.5vw;
+        position: absolute;
+        top: 10vw; left: 0vw; right: 0vw;
+        margin: auto;
+
+        font-size: 7vw;
+    }
+
+    p {
+        height: 5.5vw;
+        position: relative;
+        top: 16.5vw; left: 0vw; right: 0vw;
+        margin: auto;
+
+        font-size: 2vw;  
+        font-family: 'Black Han Sans', sans-serif;
+    }
+
+    button {
+        width: 25vw;
+        height: 4vw;
+
+        background: linear-gradient(rgb(39, 42, 255), rgb(239, 60, 255));
+        border-radius: 10vw;
+        box-shadow: 0px 0.25vw rgb(13, 0, 70);
+        border: 0px;
+
+        position: relative;
+        top: 20vw; left: 0vw; right: 0vw;
+        margin: auto;
+
+        color: $color-white;
+        font-size: 3vw;
+        text-shadow: 0px 7px 2px rgba(30, 0, 163, 0.75);
+        transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        i {
+            padding-right: 1vw;
+        }
+
+        &:hover {
+            transform: scale(105%);
+        }
+    }
+
+    &.started {
+        display: none;
+    }
+}
+
+.main__minigame--end {
+    width: 100vw;
+    height: 30vw;
+
+    color: $color-white;
+    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+    text-align: center;
+
+    position: relative;
+    top: 12vw;
+
+    h4 {
+        height: 5.5vw;
+        margin: 0;
+
+        position: relative;
+        top: 8vw;
+
+        @include space-darken-gradient;
+        text-shadow: 0px -4px $color-white;
+        font-size: 5.5vw;
+
+        &:hover {
+            text-shadow: 0px -2px $color-white;
+        }
+    }
+
+    p {
+        margin: 0;
+
+        position: relative;
+        top: 8.5vw;
+
+        @include space-darken-gradient;
+        text-shadow: 0px -2px $color-white;
+        font-size: 2vw;
+        font-family: 'Black Han Sans', sans-serif;
+    }
+
+    button {
+        width: 25vw;
+        height: 4vw;
+
+        background: linear-gradient(rgb(39, 42, 255), rgb(239, 60, 255));
+        border-radius: 10vw;
+        box-shadow: 0px 0.25vw rgb(13, 0, 70);
+        border: 0px;
+
+        position: relative;
+        top: 16vw; left: 0vw; right: 0vw;
+        margin: auto;
+
+        color: $color-white;
+        font-size: 3vw;
+        text-shadow: 0px 7px 2px rgba(30, 0, 163, 0.75);
+        transition: transform .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+        i {
+            padding-right: 1vw;
+        }
+
+        &:hover {
+            transform: scale(105%);
+        }
+    }
+
+    &.not-ended {
+        display: none;
+    }
+}
+
+.main__minigame--result {
+    width: 70vw;
+    height: 4vw;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: relative;
+    top: 12vw; left: 0vw; right: 0vw;
+    margin: auto;
+
+    background: $color-white; 
+    border-radius: 50px;
+    box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
+
+    .minigame-result {
+        flex-basis: 20vw;
+        height: 3vw;
+
+        @include space-darken-gradient;
+        vertical-align: middle;
+        transition: all 0.3s ease-out;
+
+        i {
+            @include space-gradient;
+            margin: 0vw auto 0.75vw auto;
+            font-size: 2.25vw;
+        }
+
+        span {
+            margin: 0vw 1vw 0.75vw 1vw;
+            font-size: 1.75vw;
+        }
+
+        strong {
+            font-size: 2.75vw;
+        }
+
+        &:hover {
+            flex-basis: 19vw;
+            margin: 0vw 2vw;
+        }
+    }
+
+    &.started {
+        display: none;
+    }
+}
+
+.main__minigame--main {
+    width: 80vw;
+    height: 48vw;
+    padding: 0.5vw 0.75vw;
+
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: relative;
+    top: 10vw; left: 0vw; right: 0vw;
+    margin: auto;
+
+    perspective: 80vw;
+
+    background: rgba(174, 130, 255, 0.5); 
+    border-radius: 20px;
+    border: 5px solid $color-white;
+    box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
+
+    &.not-started {
+        visibility: hidden;
+    }
+}
+
+.main__minigame--card {
+    flex-basis: 8vw;
+    height: 11vw;
+
+    margin: 0.25vw;
+
+    background-image: url(../img/card-back.png);
+    background-size: contain;
+    border-radius: 10px;
+    border: 1px solid rgba(30, 0, 163, 0.25);
+    box-shadow: 0px 3px rgba(30, 0, 163, 0.75);
+
+    transform-style: preserve-3d;
+    transform: scale(100%);
+    transition: transform .5s;
+
+    &:hover {
+        transform: scale(97%);
+        transition: transform 0.2s;
+    }
+
+    &.flip-card {
+        background-size: cover;
+        transform: rotateY(180deg);
+        transition: transform .5s;
+
+        &[data-card='1'] {
+            background: rgb(255, 255, 255) url("../img/icon_img/icon_1.png");
+        }
+
+        &[data-card='2'] {
+            background: rgb(255, 255, 255) url("../img/icon_img/icon_2.png");
+        }
+
+        &[data-card='3'] {
+            background: rgb(255, 255, 255) url("../img/icon_img/icon_3.png");
+        }
+
+        &[data-card='4'] {
+            background: rgb(255, 255, 255) url("../img/icon_img/icon_4.png");
+        }
+    }
+
+    &.hidden-card {
+        visibility: hidden;
+    }
+}
