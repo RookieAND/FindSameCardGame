@@ -21,10 +21,10 @@ export default class flipCard {
             setTimeout(() => card.classList.add('hidden-card'), 500);
         });
 
-        // 점수 : 기본 100 점 + 콤보 ^ 2 * 10 + (스테이지 - 1) * 2 | 시간 : 0.5초 + 콤보 ^ 2 * 0.1초
+        // 점수 : 기본 100 점 + 콤보 ^ 2 * 10 + (스테이지 - 1) * 2 | 시간 : 0.3초 + 콤보 ^ 1.5 * 0.1초
         console.log(this.gameStatue.timeLeft);
         this.gameStatue.score += 100 + (this.gameStatue.combo ^ 2 * 10) + (this.gameStatue.currentStage - 1) * 2;
-        this.gameStatue.timeLeft += 500 + (this.gameStatue.combo  ^ 2 * 100);
+        this.gameStatue.timeLeft += 300 + (this.gameStatue.combo  ^ 1.5 * 100);
         this.gameStatue.combo += 1;
         console.log(this.gameStatue.timeLeft);
         scoreDisplay.innerText = this.gameStatue.score.toLocaleString("en-US")
