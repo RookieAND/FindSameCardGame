@@ -21,14 +21,12 @@ export default class flipCard {
             setTimeout(() => card.classList.add('hidden-card'), 500);
         });
 
-        // 점수 : 기본 100 점 + 콤보 ^ 2 * 10 + (스테이지 - 1) | 시간 : 0.5초 + (콤보 - 1) ^ 2 * 0.05초
+        // 점수 : 기본 100 점 + 콤보 ^ 2 * 10 + (스테이지 - 1) * 2 | 시간 : 0.5초 + 콤보 ^ 2 * 0.1초
         console.log(this.gameStatue.timeLeft);
-
-        this.gameStatue.score += 100 + ((this.gameStatue.combo - 1) ^ 2 * 10) + (this.gameStatue.currentStage - 1);
-        this.gameStatue.timeLeft += 50 + ((this.gameStatue.combo - 1) ^ 2 * 5) + (this.gameStatue.currentStage - 1);
+        this.gameStatue.score += 100 + (this.gameStatue.combo ^ 2 * 10) + (this.gameStatue.currentStage - 1) * 2;
+        this.gameStatue.timeLeft += 500 + (this.gameStatue.combo  ^ 2 * 100);
         this.gameStatue.combo += 1;
         console.log(this.gameStatue.timeLeft);
-
         scoreDisplay.innerText = this.gameStatue.score.toLocaleString("en-US")
     }
     
@@ -78,10 +76,12 @@ export default class flipCard {
     shuffleCard = () => {
         const shuffleNum = [...Array(36).keys()].sort(() => Math.random() - 0.5);
         // 36개의 카드를 4분할 하여, 각 범주에 해당되는 카드를 불러와 id를 할당시킴
-        for (let i = 0; i < shuffleNum.length; i += 12) {
-            const sameCardList = shuffleNum.slice(i, i + 12);
+        // 10 스테이지 이상부터는 카드의 종류가 3개에서 6개로 늘어남.
+        const cardSection = this.gameStatue.currentStage >= 10 ? 6 : 12;
+        for (let i = 0; i < shuffleNum.length; i += cardSection) {
+            const sameCardList = shuffleNum.slice(i, i + cardSection);
             sameCardList.forEach(cardNum => {
-                cardList[cardNum].dataset.card = parseInt(i / 12);
+                cardList[cardNum].dataset.card = parseInt(i / cardSection);
             });
         }
     }

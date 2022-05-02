@@ -16,6 +16,7 @@ const gameNextStage = document.querySelector(".main__minigame--next-stage");
 const gameEndLobby = document.querySelector(".main__minigame--end");
 
 const GAME_PLAYTIME = 60000;
+const GAME_BONUSTIME = 15000;
 
 import flipCard from "./flipcard.js";
 
@@ -41,7 +42,8 @@ class GameStatue {
 
     prepareNextStage() {
         this.currentStage += 1;
-        this.timeLeft += 20000;
+        this.timeLeft += GAME_BONUSTIME;
+        this.score += this.currentStage * 200;
         this.combo = 0;
 
         const timeSec = parseInt(gameObj.timeLeft / 1000);
