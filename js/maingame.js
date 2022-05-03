@@ -46,11 +46,8 @@ class GameStatue {
         this.score += this.currentStage * 200;
         this.combo = 0;
 
-        const timeSec = parseInt(gameObj.timeLeft / 1000);
-        const timeMilliSec = gameObj.timeLeft - (timeSec * 1000);
-
         stageDisplay.innerText = this.currentStage;
-        timeDisplay.innerText = `${String(timeSec).padStart(2, "0")}:${String(timeMilliSec).slice(0, 2).padStart(2, "0")}`;
+        this.displayTimeLeft();
 
         gameFrame.classList.add('not-started');
         gameNextStage.classList.remove('not-completed');
@@ -87,6 +84,14 @@ class GameStatue {
         timeDisplay.innerText = "00:00"
         stageDisplay.innerText = this.currentStage;
     }
+
+    // 현재 잔여 시간을 화면에 출력시키는 함수
+    displayTimeLeft = () => {
+        const timeSec = parseInt(gameObj.timeLeft / 1000);
+        const timeMilliSec = gameObj.timeLeft - (timeSec * 1000);
+        timeDisplay.innerText = `${String(timeSec).padStart(2, "0")}:${String(timeMilliSec).slice(0, 2).padStart(2, "0")}`;
+    }
+
 }
 
 const gameObj = new GameStatue();
@@ -99,26 +104,17 @@ function startGame() {
     gameCard.shuffleCard();
     gameCard.defaultCardSet();
 
-    setTimeout(() => {
-        const gameTimeLeft = setInterval(() => {
-            if (checkgameStatue()) {clearInterval(gameTimeLeft)}
-            countTimeLeft();
-        }, 10);
-    }, 3000);
+    setTimeout(() => countTimeLeft(), 3000);
 }
 
 // 다음 스테이지를 로드하기 전에, 전처리 과정을 진행하는 함수
 function gotoNextStage() {
+
     gameObj.runningNextStage();
     gameCard.shuffleCard();
     gameCard.defaultCardSet();
 
-    setTimeout(() => {
-        const gameTimeLeft = setInterval(() => {
-            if (checkgameStatue()) {clearInterval(gameTimeLeft)}
-            countTimeLeft();
-        }, 10);
-    }, 3000);
+    setTimeout(() => countTimeLeft(), 3000);
 }
 
 // 현재 시간이 얼마나 흘렀는지를 체크하고, 0초라면 즉시 게임을 종료 시킴.
@@ -139,13 +135,15 @@ function checkgameStatue() {
     return false;
 }
 
-// 0.1 초 단위로 남은 숫자를 제거하며 카운트를 진행시킴
+// 현재 시간에 따른 게임 조건을 체크하고, 0.1초씩 남은 시간을 감소시키는 함수
 function countTimeLeft() {
-    gameObj.timeLeft -= 10;
-    const timeSec = parseInt(gameObj.timeLeft / 1000);
-    const timeMilliSec = gameObj.timeLeft - (timeSec * 1000);
-    timeDisplay.innerText = `${String(timeSec).padStart(2, "0")}:${String(timeMilliSec).slice(0, 2).padStart(2, "0")}`;
+    const gameTimeLeft = setInterval(() => {
+        if (checkgameStatue()) {clearInterval(gameTimeLeft)}
+        gameObj.timeLeft -= 10;
+        gameObj.displayTimeLeft();
+    }, 10);
 }
+
 
 startBtn.addEventListener('click', startGame);
 go2LobbyBtn.addEventListener('click', gameObj.returnToLobby);
