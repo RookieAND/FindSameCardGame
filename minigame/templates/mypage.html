@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SCSS, CSS 관련 link 라인 -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="../static/css/mypage.css">
+    <!-- 아이콘 및 fontawesome import 라인 -->
+    <link rel="icon" href="../static/img/icon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/e3d1ead7f0.js" crossorigin="anonymous"></script>
+    <title>Baik's Minegame Center</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="main__navbar">
+            <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
+            <a href="#"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
+            <a href="#"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
+            <a href="{{ url_for('account.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up</a>
+        </nav>
+        <div class="main__background--login">
+            <h3>Find the same picture</h3>
+            <p>Welcome to Baik's Minegame Center!</p>
+            <a href="{{ url_for('account.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up our center</a>
+        </div>
+        <div class="main__login">
+            <div class="main__darken-gradient"></div>
+            <div class="main__login--title">
+                <h4>Join the Center</h4>
+                <p>미니게임 로그인</p>
+            </div>
+            <div class="main__login--session">
+
+            </div>
+        </div>
+        <footer class="main__footer">
+            <div class="main__footer--element">
+                <i class="fa-brands fa-github fa-xl"></i>
+                <i class="fa-solid fa-envelope fa-xl"></i>
+                <i class="fa-brands fa-google-plus-square fa-xl"></i>
+            </div>
+            <div class="main__footer--element">
+                <p>Copyright © 2022 dev_rookiand.co.,Ltd. All rights reserved.</p>
+                <p>Contact author for more information. <strong>gwangin1999@naver.com</strong></p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SCSS, CSS 관련 link 라인 -->
+    <link rel="stylesheet" href="../static/css/style.css">
+    <link rel="stylesheet" href="../static/css/normalize.css">
+    <link rel="stylesheet" href="../static/css/login.css">
+    <!-- 아이콘 및 fontawesome import 라인 -->
+    <link rel="icon" href="../static/img/icon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/e3d1ead7f0.js" crossorigin="anonymous"></script>
+    <title>Baik's Minegame Center</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="main__navbar">
+            <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
+            <a href="#"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
+            <a href="#"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
+            <a href="{{ url_for('account.login') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign in</a>
+        </nav>
+        <div class="main__background--login">
+            <h3>Find the same picture</h3>
+            <p>Welcome to Baik's Minegame Center!</p>
+            <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-rotate-right"></i>Back to Lobby</a>
+        </div>
+        <div class="main__account-info">
+            <div class="main__darken-gradient"></div>
+            <div class="main__register--title">
+                <h4>Welcome to our center</h4>
+                <p>새로운 회원분께 드리는 혜택 안내</p>
+            </div>
+            <div class="main__account--element">
+                <div class="account-info">
+                    <i class="fa-solid fa-address-book"></i>
+                    <span>Storing score</span>
+                    <strong>자신의 최고 기록을 저장합니다.</strong>
+                </div>
+                <div class="account-info">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Earning Star</span>
+                    <strong>인게임에서 사용 가능한 스타을 얻습니다</strong>
+                </div>
+                <div class="account-info">
+                    <i class="fa-solid fa-ranking-star"></i>
+                    <span>Above ranking</span>
+                    <strong>다른 유저와 경쟁하여 등수를 올립니다.</strong>
+                </div>
+            </div>
+        </div>
+        <div class="main__register">
+            <div class="main__darken-gradient"></div>
+            <div class="main__register--title">
+                <h4>Create your account</h4>
+                <p>미니게임 센터 회원가입</p>
+            </div>
+            <div class="main__register--session">
+                <form action="/register" method="POST">
+                    <label for="username">
+                        <i class="fa-solid fa-user-check"> <span>Username</span> </i>
+                    </label>
+                    <input type="username" name="username" placeholder="Username" autofocus required>
+                    <label for="password">
+                        <i class="fa-solid fa-unlock-keyhole"> <span>Password</span> </i>
+                    </label>
+                    <input type="password" name="password" placeholder="Password" autofocus required>
+                    <label for="email">
+                        <i class="fa-solid fa-envelope"> <span>E-mail</span> </i>
+                    </label>
+                    <input type="email" name="email" placeholder="e-mail" autofocus required>
+                    <button type="submit" class="main__register--btn"><i class="fa-solid fa-right-to-bracket"></i>Sign up</button>
+                    <p class="check-valid">{{ msg }}</p>
+                </form>
+            </div>
+        </div>
+        <footer class="main__footer">
+            <div class="main__footer--element">
+                <i class="fa-brands fa-github fa-xl"></i>
+                <i class="fa-solid fa-envelope fa-xl"></i>
+                <i class="fa-brands fa-google-plus-square fa-xl"></i>
+            </div>
+            <div class="main__footer--element">
+                <p>Copyright © 2022 dev_rookiand.co.,Ltd. All rights reserved.</p>
+                <p>Contact author for more information. <strong>gwangin1999@naver.com</strong></p>
+            </div>
+        </footer>
+    </div>
+</body>
+</html>

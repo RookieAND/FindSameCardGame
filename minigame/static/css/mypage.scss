@@ -1,0 +1,288 @@
+@import "style.scss";
+
+.main__login {
+    width: 100vw;
+    height: 50vw;
+
+    background: $color-space; 
+}
+
+.main__background--login {
+    width: 100vw;
+    height: 35vw;
+
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.15)), url(../img/bg_img.jpg);
+    background-size: cover;
+
+    color: rgb(255, 255, 2556);
+
+    text-align: center;
+
+    h3 {
+        position: relative;
+        top: 10vw;
+
+        margin: 0;
+        
+        @include space-gradient;
+        font-size: 5.5vw;
+        text-shadow: 0px -5px rgba(255, 255, 255, 1);
+    }
+
+    p {
+        position: relative;
+        top: 10vw;
+
+        margin: 0;
+        
+        @include space-darken-gradient;
+        font-size: 2vw;
+        text-shadow: 0px -4px rgba(255, 255, 255, 1);
+    }
+
+    a {
+        position: relative;
+        top: 15vw;
+
+        padding: 0.5vw 2.5vw;
+        background: linear-gradient(rgb(52, 0, 134), rgb(30, 0, 163));
+        border-radius: 5vw;
+        box-shadow: 0px 0.15vw 10px rgba(21, 0, 78, 0.5);
+
+        font-size: 2.75vw;
+        color: $color-white;
+        text-decoration: none;
+        text-align: center;
+        text-shadow: 0px 4px 1px rgba(21, 0, 78, 0.5);
+
+        transition: font-size 0.3s cubic-bezier(0.215, 0.610, 0.355, 1);
+
+        &:hover {
+            font-size: 3vw;
+        }
+
+        i {
+            margin: auto 1vw;
+        }
+    }
+}
+
+.main__register {
+    width: 100vw;
+    height: 55vw;
+
+    background-image: url(../img/bg_img2.jpg);
+    background-size: 100vw 55vw;
+}
+
+.main__account-info {
+    width: 100vw;
+    height: 40vw;
+
+    background: $color-space; 
+}
+
+.main__account--element {
+    width: 80vw;
+    height: 17.5vw;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    position: relative;
+    top: 8vw; left: 0vw; right: 0vw;
+    margin: auto;
+
+    background: $color-white; 
+    background-size: cover;
+    border-radius: 2vw;
+    box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
+
+    .account-info {
+        flex-basis: 20vw;
+        
+        @include space-gradient;
+        text-align: center;
+        transition: all 0.3s ease-out;
+
+        i {
+            margin: 0vw auto 0.75vw auto;
+            font-size: 5vw;
+        }
+
+        span {
+            display: block;
+            margin: 0vw auto;
+            
+            font-size: 2.75vw;
+        }
+
+        strong {
+            width: 12vw;
+            margin: 0vw auto;
+
+            font-family: 'NanumSquare', sans-serif;
+            font-size: 1vw;
+        }
+
+        &:hover {
+            flex-basis: 19vw;
+            margin: 0vw 2vw;
+        }
+    }
+}
+
+.main__login--title, .main__register--title {
+    color: $color-white;
+    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+    text-align: center;
+
+    position: relative;
+    top: 4vw;
+
+    h4 {
+        height: 5.5vw;
+        margin: 0;
+
+        font-size: 5.5vw;
+        text-shadow: 0px 0.3vw rgb(30, 0, 163);
+    }
+
+    p {
+        margin: 0;
+
+        font-size: 2vw;
+        font-family: 'Black Han Sans', sans-serif;
+        text-shadow: 0px 0.2vw rgb(30, 0, 163);
+    }
+}
+
+.main__login--session, .main__register--session {
+    width: 50vw;
+    height: 30vw;
+
+    position: relative;
+    top: 7vw;
+    margin: auto;
+
+    background: $color-white; 
+    border-radius: 2.5vw;
+    box-shadow: 0vw 0.25vw 0.3vw rgba(30, 0, 163, 0.5);
+
+    text-align: center;
+
+    form {
+        width: 25vw;
+        height: 20vw;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        position: relative;
+        top: 3.5vw;
+        margin: auto;
+    }
+    
+    label {
+        padding: 0.4vw 3vw 0vw 4vw;
+        background: linear-gradient(rgb(29, 32, 202), rgb(183, 46, 196));
+        border-radius: 2vw;
+
+        position: relative;
+        left: 0.2vw;
+
+        color: $color-white;
+        vertical-align: middle;
+
+        span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-weight: 100;
+        }
+    }
+
+    i {
+        font-size: 1.25vw;
+
+        position: relative;
+        top: -0.15vw;
+        right: 0.75vw;
+    }
+
+    p.check-valid {
+        position: relative;
+        bottom: 5.25vw;
+
+        color: rgb(52, 0, 134);
+        font-family: 'NanumSquare', sans-serif;
+        font-size: 1vw;
+    }
+
+    input {
+        width: 25vw;
+        height: 3vw;
+
+        margin: 1vw auto 3vw auto;
+
+        border: 0px;
+        border-bottom: 1px solid rgb(30, 0, 163);
+
+        font-size: 2vw;
+        text-align: center;
+
+        color: rgb(30, 0, 163);
+        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        &::placeholder {
+            font-size: 1.75vw;
+            color: rgba(30, 0, 163, 0.1)
+        }
+
+        &:focus {
+            outline: none;
+            width: 20vw;
+        }
+    }
+}
+
+.main__login--btn, .main__register--btn  {
+    width: 20vw;
+    height: 4vw;
+    padding: 0.5vw 0vw;
+
+    position: relative;
+    top: 1vw;
+
+    background: linear-gradient(rgb(39, 42, 255), rgb(239, 60, 255));
+    border: 0px;
+    border-radius: 2vw;
+    box-shadow: 0vw 0.2vw 0.1vw rgba(117, 0, 146, 0.75);
+
+    color: $color-white;
+    text-shadow: 0px 0.2vw 2px rgba(67, 0, 190, 0.3);
+    font-size: 2vw;
+
+    transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+    &:hover {
+        width: 13vw;
+        font-size: 1.8vw;
+    }
+
+    i {
+        position: relative;
+        top: 0.05vw;
+        right: 0.75vw;
+
+        font-size: 1.75vw;
+    }
+}
+
+.main__footer {
+    width: 100vw;
+    height: 10vw;
+
+    text-align: center;
+    background: $color-space-reversed;
+}
