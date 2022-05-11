@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- SCSS, CSS 관련 link 라인 -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/game.css">
+    <!-- 아이콘 및 fontawesome import 라인 -->
+    <link rel="icon" href="img/icon.png" type="image/x-icon">
+    <script src="https://kit.fontawesome.com/e3d1ead7f0.js" crossorigin="anonymous"></script>
+    <title>Baik's Minegame Center</title>
+</head>
+<body>
+    <div class="container">
+        <nav class="main__navbar">
+            <a href="#"><i class="fa-solid fa-square-caret-right"></i>Main</a>
+            <a href="#"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
+            <a href="#"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
+            <a href="#"><i class="fa-solid fa-circle-info"></i>My page</a>
+        </nav>
+        <div class="main__background">
+            <h3>Find the same picture</h3>
+            <p>Welcome to Baik's Minegame Center!</p>
+            <a href="index.html"><i class="fa-solid fa-rotate-right"></i>Back to Lobby</a>
+        </div>
+        <div class="main__mybest">
+            <div class="main__darken-gradient"></div>
+            <div class="main__mybest--title">
+                <h4>My Best Score</h4>
+                <p>나의 최고 기록</p>
+            </div>
+            <div class="main__mybest--element">
+                <div class="mybest--guide">
+                    <i class="fa-solid fa-award"></i>
+                    <span>Total Rank</span>
+                    <strong># 17</strong>
+                </div>
+                <div class="mybest--guide">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Best Stage</span>
+                    <strong>32</strong>
+                </div>
+                <div class="mybest--guide">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    <span>Best Score</span>
+                    <strong>12,458</strong>
+                </div>
+            </div>
+        </div>
+        <div class="main__minigame">
+            <div class="main__minigame--title">
+                <h4>Playing Minigame</h4>
+                <p>미니게임 플레이</p>
+            </div>
+            <div class="main__minigame--status">
+                <div class="minigame-status time">
+                    <i class="fa-solid fa-clock"></i>
+                    <span>Time left</span>
+                    <strong>00:00</strong>
+                </div>
+                <div class="minigame-status stage">
+                    <i class="fa-solid fa-star"></i>
+                    <span>Current Stage</span>
+                    <strong>1</strong>
+                </div>
+                <div class="minigame-status score">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    <span>My Score</span>
+                    <strong>0</strong>
+                </div>
+            </div>
+            <div class="main__minigame--lobby">
+                <h4>Are you ready?</h4>
+                <p>준비가 되셨다면 하단의 시작 버튼을 누르세요!</p>
+                <button><i class="fa-solid fa-caret-right"></i>Game Start</button>
+            </div>
+            <div class="main__minigame--next-stage not-completed">
+                <h4>Stage Clear!</h4>
+                <p>다음 스테이지로 가려면 하단의 버튼을 눌러주세요!</p>
+                <button><i class="fa-solid fa-caret-right"></i>Go to Next Stage</button>
+            </div>
+            <div class="main__minigame--end not-ended">
+                <h4>Game Over!</h4>
+                <p>게임이 종료되었습니다. 스코어를 확인해주세요!</p>
+                <div class="main__minigame--result">
+                    <div class="minigame-result stage">
+                        <i class="fa-solid fa-star"></i>
+                        <span>Total Stage</span>
+                        <strong>1</strong>
+                    </div>
+                    <div class="minigame-result score">
+                        <i class="fa-solid fa-square-poll-vertical"></i>
+                        <span>Total Score</span>
+                        <strong>0</strong>
+                    </div>
+                    <div class="minigame-result best-score">
+                        <i class="fa-solid fa-square-poll-vertical"></i>
+                        <span>Best Score</span>
+                        <strong>0</strong>
+                    </div>
+                </div>
+                <button><i class="fa-solid fa-caret-right"></i>Back to Lobby</button>
+            </div>
+            <div class="main__minigame--main not-started">
+                <div class="main__minigame--card" id="card-1" data-card="1"></div>
+                <div class="main__minigame--card" id="card-2" data-card="2"></div>
+                <div class="main__minigame--card" id="card-3" data-card="3"></div>
+                <div class="main__minigame--card" id="card-4" data-card="4"></div>
+                <div class="main__minigame--card" id="card-5" data-card="1"></div>
+                <div class="main__minigame--card" id="card-6" data-card="2"></div>
+                <div class="main__minigame--card" id="card-7" data-card="3"></div>
+                <div class="main__minigame--card" id="card-8" data-card="4"></div>
+                <div class="main__minigame--card" id="card-9" data-card="1"></div>
+                <div class="main__minigame--card" id="card-10" data-card="2"></div>
+                <div class="main__minigame--card" id="card-11" data-card="3"></div>
+                <div class="main__minigame--card" id="card-12" data-card="4"></div>
+                <div class="main__minigame--card" id="card-13" data-card="1"></div>
+                <div class="main__minigame--card" id="card-14" data-card="2"></div>
+                <div class="main__minigame--card" id="card-15" data-card="3"></div>
+                <div class="main__minigame--card" id="card-16" data-card="4"></div>
+                <div class="main__minigame--card" id="card-17" data-card="1"></div>
+                <div class="main__minigame--card" id="card-18" data-card="2"></div>
+                <div class="main__minigame--card" id="card-19" data-card="3"></div>
+                <div class="main__minigame--card" id="card-20" data-card="4"></div>
+                <div class="main__minigame--card" id="card-21" data-card="1"></div>
+                <div class="main__minigame--card" id="card-22" data-card="2"></div>
+                <div class="main__minigame--card" id="card-23" data-card="3"></div>
+                <div class="main__minigame--card" id="card-24" data-card="4"></div>
+                <div class="main__minigame--card" id="card-25" data-card="1"></div>
+                <div class="main__minigame--card" id="card-26" data-card="2"></div>
+                <div class="main__minigame--card" id="card-27" data-card="3"></div>
+                <div class="main__minigame--card" id="card-28" data-card="4"></div>
+                <div class="main__minigame--card" id="card-29" data-card="1"></div>
+                <div class="main__minigame--card" id="card-30" data-card="2"></div>
+                <div class="main__minigame--card" id="card-31" data-card="3"></div>
+                <div class="main__minigame--card" id="card-32" data-card="4"></div>
+                <div class="main__minigame--card" id="card-33" data-card="1"></div>
+                <div class="main__minigame--card" id="card-34" data-card="2"></div>
+                <div class="main__minigame--card" id="card-35" data-card="3"></div>
+                <div class="main__minigame--card" id="card-36" data-card="4"></div>
+            </div>
+        </div>
+        <footer class="main__footer">
+            <div class="main__footer--element">
+                <i class="fa-brands fa-github fa-xl"></i>
+                <i class="fa-solid fa-envelope fa-xl"></i>
+                <i class="fa-brands fa-google-plus-square fa-xl"></i>
+            </div>
+            <div class="main__footer--element">
+                <p>Copyright © 2022 dev_rookiand.co.,Ltd. All rights reserved.</p>
+                <p>Contact author for more information. <strong>gwangin1999@naver.com</strong></p>
+            </div>
+        </footer>
+        <script type="module" src="js/maingame.js"></script>
+        <script type="module" src="js/flipcard.js"></script>
+    </div>
+</body>
+</html>
