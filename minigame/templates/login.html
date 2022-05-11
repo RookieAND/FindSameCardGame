@@ -19,12 +19,12 @@
             <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
             <a href="#"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
             <a href="#"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
-            <a href="{{ url_for('account.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up</a>
+            <a href="{{ url_for('signup.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up</a>
         </nav>
         <div class="main__background--login">
             <h3>Find the same picture</h3>
             <p>Welcome to Baik's Minegame Center!</p>
-            <a href="{{ url_for('account.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up our center</a>
+            <a href="{{ url_for('signup.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up our center</a>
         </div>
         <div class="main__login">
             <div class="main__darken-gradient"></div>
@@ -33,17 +33,23 @@
                 <p>미니게임 로그인</p>
             </div>
             <div class="main__login--session">
-                <form action="http://localhost:5000/login" method="POST">
+                <form action="/login" method="POST">
                     <label for="username">
                         <i class="fa-solid fa-user"> <span>Username</span> </i>
                     </label>
-                    <input type="username" name="username" placeholder="Username" autofocus required>
+                    {{form.username()}}
                     <label for="password">
                         <i class="fa-solid fa-lock"> <span>Password</span> </i>
                     </label>
-                    <input type="password" name="password" placeholder="Password" autofocus required>
+                    {{form.password()}}
                     <button type="submit" class="main__login--btn"><i class="fa-solid fa-right-to-bracket"></i>Sign in</button>
-                    <p class="check-valid">{{ msg }}</p>
+                    {% with messages = get_flashed_messages()%}
+                        {% if messages %}
+                            {% for msg in messages %}
+                            <p class="check-valid">{{ msg }}</p>
+                            {% endfor %}
+                        {% endif %}
+                    {% endwith %}
                 </form>
             </div>
         </div>

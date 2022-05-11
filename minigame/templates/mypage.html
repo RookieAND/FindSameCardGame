@@ -17,24 +17,69 @@
     <div class="container">
         <nav class="main__navbar">
             <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
-            <a href="#"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
             <a href="#"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
-            <a href="{{ url_for('account.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up</a>
+            <a href="{{ url_for('main.my_page') }}"><i class="fa-solid fa-user"></i></i>{{username}}</a>
+            <a href="{{ url_for('account.logout') }}"><i class="fa-solid fa-right-from-bracket"></i>log out</a>
         </nav>
-        <div class="main__background--login">
+        <div class="main__background">
             <h3>Find the same picture</h3>
-            <p>Welcome to Baik's Minegame Center!</p>
-            <a href="{{ url_for('account.register') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign up our center</a>
+            <p>Welcome Back {{username}}! have a good day!</p>
+            <a href="{{ url_for('main.running_game', username=username)}}"><i class="fa-solid fa-play"></i>Play the game</a>
         </div>
-        <div class="main__login">
+        <div class="main__statistic">
             <div class="main__darken-gradient"></div>
-            <div class="main__login--title">
-                <h4>Join the Center</h4>
-                <p>미니게임 로그인</p>
+            <div class="main__statistic--title">
+                <h4>My Statistics</h4>
+                <p>{{username}}님의 게임 정보</p>
             </div>
-            <div class="main__login--session">
+            <div class="main__statistic--element">
+                <div class="statistic--option rank">
+                    <i class="fa-solid fa-award"></i>
+                    <span>Total Rank</span>
+                    <strong># {{ "{:,}".format(total_rank) }}</strong>
+                </div>
+                <div class="statistic--option stage">
+                    <i class="fa-solid fa-crown"></i>
+                    <span>Best Stage</span>
+                    <strong>{{ "{:,}".format(best_stage) }}</strong>
+                </div>
+                <div class="statistic--option score">
+                    <i class="fa-solid fa-square-poll-vertical"></i>
+                    <span>Best Score</span>
+                    <strong>{{ "{:,}".format(best_score) }}</strong>
+                </div>
+            </div>
+        </div>
+        <div class="main__myinfo">
+            <div class="main__myinfo--title">
+                <h4>My Profile</h4>
+                <p>{{username}}님의 프로필</p>
+            </div>
+            <div class="main__myinfo--section">
+                <div class="myinfo--option profile">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="myinfo--option nickname">
+                    <h5>{{username}}</h5>
+                </div>
+                <div class="myinfo--option detail">
+                    <div class="detail-list">
+                        <i class="fa-solid fa-envelope"></i><span>{{playerEmail}}</span>
+                    </div>
+                    <div class="detail-list">
+                        <i class="fa-solid fa-right-to-bracket"></i><span>{{playerJoinDate}}</span>
+                    </div>
+                    <div class="detail-list">
+                        <i class="fa-solid fa-star"></i><span>{{"{:,}".format(total_star)}} 개</span>
+                    </div>
+                </div>
+                <div class="myinfo--option decoration">
 
+                </div>
             </div>
+        </div>
+        <div class="main__profile--option">
+            
         </div>
         <footer class="main__footer">
             <div class="main__footer--element">

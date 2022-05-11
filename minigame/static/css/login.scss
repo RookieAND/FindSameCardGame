@@ -133,29 +133,12 @@
     }
 }
 
-.main__login--title, .main__register--title {
-    color: $color-white;
-    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
-    text-align: center;
+.main__login--title {
+    @include section-gradient-title;
+}
 
-    position: relative;
-    top: 4vw;
-
-    h4 {
-        height: 5.5vw;
-        margin: 0;
-
-        font-size: 5.5vw;
-        text-shadow: 0px 0.3vw rgb(30, 0, 163);
-    }
-
-    p {
-        margin: 0;
-
-        font-size: 2vw;
-        font-family: 'Black Han Sans', sans-serif;
-        text-shadow: 0px 0.2vw rgb(30, 0, 163);
-    }
+.main__register--title {
+    @include section-image-title;
 }
 
 .main__login--session {
@@ -247,7 +230,7 @@
 }
 
 .main__register--session {
-    width: 50vw;
+    width: 40vw;
     height: 40vw;
 
     position: relative;
@@ -260,9 +243,13 @@
 
     text-align: center;
 
+    &.submitted {
+        display: none;
+    }
+
     form {
         width: 25vw;
-        height: 20vw;
+        height: 33vw;
 
         display: flex;
         flex-direction: column;
@@ -340,7 +327,7 @@
     padding: 0.5vw 0vw;
 
     position: relative;
-    top: 1vw;
+    top: 1.5vw;
 
     background: linear-gradient(rgb(39, 42, 255), rgb(239, 60, 255));
     border: 0px;
@@ -364,6 +351,122 @@
         right: 0.75vw;
 
         font-size: 1.75vw;
+    }
+}
+
+.main__register--confirm {
+    width: 50vw;
+    height: 35vw;
+
+    position: relative;
+    top: 7vw;
+    margin: auto;
+
+    background: $color-white; 
+    border-radius: 2.5vw;
+    box-shadow: 0vw 0.25vw 0.3vw rgba(30, 0, 163, 0.5);
+
+    text-align: center;
+
+    &.not-submitted {
+        display: none;
+    }
+
+    h4 {
+        position: relative;
+        top: 4.5vw;
+
+        margin: 0;
+        
+        @include space-gradient;
+        font-size: 4vw;
+    }
+
+    p {
+        position: relative;
+        top: 5vw;
+
+        margin: 0;
+        
+        color:rgb(104, 0, 189);
+        font-size: 1vw;
+        font-family: 'Nanumsquare', sans-serif;
+    }
+
+    strong {
+        font-weight: 800;
+    }
+
+    i {
+        position: relative;
+        top: 3.5vw;
+
+        @include space-gradient;
+        font-size: 10vw;
+    }
+
+    form {
+        width: 25vw;
+        height: 10vw;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        position: relative;
+        top: 7.5vw;
+        margin: auto;
+    }
+    
+    label {
+        padding: 0.4vw 3vw 0vw 4vw;
+        background: linear-gradient(rgb(29, 32, 202), rgb(183, 46, 196));
+        border-radius: 2vw;
+
+        position: relative;
+        left: 0.2vw;
+
+        vertical-align: middle;
+
+        span {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 2vw;
+            font-weight: 100;
+        }
+
+        i {
+            font-size: 1.25vw;
+    
+            position: relative;
+            top: -0.15vw;
+            right: 0.75vw;
+        }
+    }
+
+    input {
+        width: 25vw;
+        height: 3vw;
+
+        margin: 1vw auto 3vw auto;
+
+        border: 0px;
+        border-bottom: 1px solid rgb(30, 0, 163);
+
+        font-size: 2vw;
+        text-align: center;
+
+        color: rgb(30, 0, 163);
+        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+        &::placeholder {
+            font-size: 1.75vw;
+            color: rgba(30, 0, 163, 0.1)
+        }
+
+        &:focus {
+            outline: none;
+            width: 20vw;
+        }
     }
 }
 

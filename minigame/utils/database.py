@@ -1,25 +1,17 @@
-import json
-import os
 import bcrypt
 import datetime
 import pymysql
 from pymysql import cursors
-
-# 현재 실행 중인 파일의 절대 경로를 찾은 후, 이를 실행 경로로 설정함
-os.chdir(os.path.dirname(os.path.abspath(__file__)))
-
-# data 파일에 저장된 mysql.json 을 로딩
-with open('config/mysql.json') as myf:
-    sql_config = json.load(myf)
+from flask import current_app
 
 
 def connect_mysql() -> tuple:
     # 수업 정보를 가져올 때마다 MySQL에 연결을 실행해야 함.
     user_db = pymysql.connect(
-        host=sql_config['MYSQL_HOST'],
-        user=sql_config['MYSQL_USER'],
-        password=sql_config['MYSQL_PW'],
-        db=sql_config['MYSQL_DB'],
+        host=current_app.config['MYSQL_HOST'],
+        user=current_app.config['MYSQL_USER'],
+        password=current_app.config['MYSQL_PASSWORD'],
+        db=current_app.config['MYSQL_DB'],
         charset='utf8'
     )
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
@@ -56,9 +48,9 @@ def account_login(player_id: str, player_pw: str) -> bool:
     # 먼저, 해당 ID에 맞는 계정 정보가 존재하는지를 먼저 체크해야 한다.
     if account_pw:
         # DB에서 꺼낸 PW를 byte로 변경한 값과, 입력받은 PW를 byte로 변경한 값이 일치하는지 체크
-        # 만약 해당 PW가 서로 일치한다면 True, 일치하지 않는다면 False를 리턴한다.
         player_pw = player_pw.encode('utf-8')
         check_password = bcrypt.checkpw(player_pw, account_pw['playerPW'].encode('utf-8'))
+        # 만약 해당 PW가 서로 일치한다면 True, 일치하지 않는다면 False를 리턴.
         return check_password
     return False
 
@@ -119,10 +111,9 @@ def get_user_rank(player_id: str) -> dict:
 
     # 전체 중 해당 유저의 등수를 서브 쿼리를 통해 추출하여 받아온다.
     sql = """SELECT ranking
-            FROM (SELECT playerID, RANK() OVER (ORDER BY bestScore DESC) 'ranking' 
-                  FROM minigameweb.playerlist) ranked
-            WHERE ranked.playerID = %s"""
-    cursor.execute(sql, (player_id))
+            FROM (SELECT playerID, RANK() OVER (ORDER BY bestScore DESC) 'ranking' FROM playerlist) rankTBL
+            WHERE rankTBL.playerID = %s"""
+    cursor.execute(sql, player_id)
     data = cursor.fetchone()
     user_db.close()
 
@@ -145,3 +136,51 @@ def get_leaderboard() -> dict:
     if data:
         return data
 
+
+# 여기서부터는 스타와 관련된 함수를 기입하는 곳 (보유 스타 확인, 스타 소모, 스타 지급 등..)
+
+# 현재 유저가 보유한 스타의 갯수를 얻어오는 함수.
+def star_get_amount(player_id: str) -> dict:
+    # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
+    user_db, cursor = connect_mysql()
+
+    # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
+    sql = """SELECT currentStar FROM playerlist WHERE playerID = %s"""
+
+    cursor.execute(sql, player_id)
+    data = cursor.fetchone()
+    user_db.close()
+
+    if data:
+        return data
+
+
+# 특정 유저에게 특정한 수량의 스타 갯수를 DB에 적용시키는 함수.
+def star_set_amount(player_id: str, star_amount: int) -> None:
+    # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
+    user_db, cursor = connect_mysql()
+
+    # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
+    sql = """UPDATE playerlist SET currentStar = %s WHERE playerID = %s"""
+
+    cursor.execute(sql, (player_id, star_amount))
+    user_db.commit()
+    user_db.close()
+
+# 여기서부터는 유저의 개인 정보에 대한 함수 (가입 일자, 이메일 등..)
+
+
+# 현재 유저의 프로필을 보여주기 위해 필요한 정보를 가져오는 함수
+def user_profile_info(player_id: str) -> dict:
+    # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
+    user_db, cursor = connect_mysql()
+
+    # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
+    sql = """SELECT playerJoinDate, playerEmail FROM playerlist WHERE playerID = %s"""
+
+    cursor.execute(sql, player_id)
+    data = cursor.fetchone()
+    user_db.close()
+
+    if data:
+        return data

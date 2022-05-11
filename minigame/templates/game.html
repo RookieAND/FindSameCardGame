@@ -18,7 +18,7 @@
         <nav class="main__navbar">
             <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
             <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
-            <a href="#"><i class="fa-solid fa-user"></i></i>{{username}}</a>
+            <a href="{{ url_for('main.my_page') }}"><i class="fa-solid fa-user"></i></i>{{username}}</a>
             <a href="{{ url_for('account.logout') }}"><i class="fa-solid fa-right-from-bracket"></i>log out</a>
         </nav>
         <div class="main__background">
@@ -39,7 +39,7 @@
                     <strong># {{ "{:,}".format(total_rank) }}</strong>
                 </div>
                 <div class="mybest--guide stage">
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-crown"></i>
                     <span>Best Stage</span>
                     <strong>{{ "{:,}".format(best_stage) }}</strong>
                 </div>
@@ -62,7 +62,7 @@
                     <strong>00:00</strong>
                 </div>
                 <div class="minigame-status stage">
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-archway"></i>
                     <span>Current Stage</span>
                     <strong>1</strong>
                 </div>

@@ -18,11 +18,11 @@
             <a href="#section-info"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
             <a href="#section-leader"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
             {% if username %}
-                <a href="#"><i class="fa-solid fa-user"></i></i>{{username}}</a>
+                <a href="{{ url_for('main.my_page') }}"><i class="fa-solid fa-user"></i></i>{{username}}</a>
                 <a href="{{ url_for('account.logout') }}"><i class="fa-solid fa-right-from-bracket"></i>log out</a>
             {% else %}
                 <a href="{{ url_for('account.login') }}"><i class="fa-solid fa-right-to-bracket"></i>Sign in</a>
-                <a href="{{ url_for('account.register') }}"><i class="fa-solid fa-gamepad"></i></i>Sign up</a>
+                <a href="{{ url_for('signup.register') }}"><i class="fa-solid fa-gamepad"></i></i>Sign up</a>
             {% endif %}
         </nav>
         <div class="main__background">

@@ -20,6 +20,62 @@ $color-space-reversed: linear-gradient(rgba(98, 0, 122, 0.9) 40%, rgb(37, 0, 170
     -webkit-text-fill-color: transparent;
 }
 
+@mixin section-gradient-title {
+    color: $color-white;
+    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+    text-align: center;
+
+    position: relative;
+    top: 4vw;
+
+    h4 {
+        height: 5.5vw;
+        margin: 0;
+
+        font-size: 5.5vw;
+        text-shadow: 0px 0.3vw rgb(30, 0, 163);
+    }
+
+    p {
+        margin: 0;
+
+        font-size: 2vw;
+        font-family: 'Black Han Sans', sans-serif;
+        text-shadow: 0px 0.2vw rgb(30, 0, 163);
+    }
+}
+
+@mixin section-image-title {
+    color: $color-white;
+    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+    text-align: center;
+
+    position: relative;
+    top: 4vw;
+
+    h4 {
+        height: 5.5vw;
+        margin: 0;
+
+        @include space-darken-gradient;
+        text-shadow: 0px -4px $color-white;
+        font-size: 5.5vw;
+
+        &:hover {
+            text-shadow: 0px -2px $color-white;
+        }
+    }
+
+    p {
+        margin: 0;
+
+        @include space-darken-gradient;
+        text-shadow: 0px -2px $color-white;
+        font-size: 2vw;
+        font-family: 'Black Han Sans', sans-serif;
+    }
+}
+
 html { 
     font-family: sans-serif; 
     -ms-text-size-adjust: 100%;
@@ -138,32 +194,7 @@ body {
 }
 
 .main__information--title {
-    color: $color-white;
-    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
-    text-align: center;
-
-    position: relative;
-    top: 4vw;
-
-    h4 {
-        height: 5.5vw;
-        margin: 0;
-
-        font-size: 5.5vw;
-        text-shadow: 0px 3px rgb(30, 0, 163);
-
-        &:hover {
-            text-shadow: 0px 2px rgb(30, 0, 163);
-        }
-    }
-
-    p {
-        margin: 0;
-
-        font-size: 2vw;
-        font-family: 'Black Han Sans', sans-serif;
-        text-shadow: 0px 2px rgb(30, 0, 163);
-    }
+    @include section-gradient-title;
 }
 
 .main__information--element {
@@ -245,34 +276,7 @@ body {
 }
 
 .main__leaderboard--title {
-    color: $color-white;
-    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
-    text-align: center;
-
-    position: relative;
-    top: 4vw;
-
-    h4 {
-        height: 5.5vw;
-        margin: 0;
-
-        @include space-darken-gradient;
-        text-shadow: 0px -4px $color-white;
-        font-size: 5.5vw;
-
-        &:hover {
-            text-shadow: 0px -2px $color-white;
-        }
-    }
-
-    p {
-        margin: 0;
-
-        @include space-darken-gradient;
-        text-shadow: 0px -2px $color-white;
-        font-size: 2vw;
-        font-family: 'Black Han Sans', sans-serif;
-    }
+    @include section-image-title;
 }
 
 .main__leaderboard--list {
@@ -360,7 +364,6 @@ body {
         margin: 2vw 4vw 1vw 4vw;
 
         font-size: 2vw;
-        text-shadow: 0px 2px 1px rgb(31, 0, 141);
         line-height: 2.5vw;
     }
     

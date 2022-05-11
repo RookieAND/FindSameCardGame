@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Oswald:wght@200;400;700&family=Secular+One&family=Source+Sans+Pro&family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css");
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -129,18 +130,14 @@ body {
   height: 5.5vw;
   margin: 0;
   font-size: 5.5vw;
-  text-shadow: 0px 3px #1e00a3;
-}
-
-.main__information--title h4:hover {
-  text-shadow: 0px 2px #1e00a3;
+  text-shadow: 0px 0.3vw #1e00a3;
 }
 
 .main__information--title p {
   margin: 0;
   font-size: 2vw;
   font-family: 'Black Han Sans', sans-serif;
-  text-shadow: 0px 2px #1e00a3;
+  text-shadow: 0px 0.2vw #1e00a3;
 }
 
 .main__information--element {
@@ -193,7 +190,7 @@ body {
 .main__information--element .information--guide p {
   width: 12vw;
   margin: 0vw auto;
-  font-family: nanumsquare;
+  font-family: 'NanumSquare', sans-serif;
   font-size: 1vw;
 }
 
@@ -367,7 +364,6 @@ body {
   height: 2.5vw;
   margin: 2vw 4vw 1vw 4vw;
   font-size: 2vw;
-  text-shadow: 0px 2px 1px #1f008d;
   line-height: 2.5vw;
 }
 
@@ -377,90 +373,42 @@ body {
   font-size: 1vw;
 }
 
-.main__login {
+.main__statistic {
   width: 100vw;
-  height: 50vw;
+  height: 30vw;
   background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
   background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
 }
 
-.main__background--login {
-  width: 100vw;
-  height: 35vw;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, 0.3)), to(rgba(0, 0, 0, 0.15))), url(../img/bg_img.jpg);
-  background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.15)), url(../img/bg_img.jpg);
-  background-size: cover;
+.main__statistic--title {
   color: white;
+  text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
   text-align: center;
+  position: relative;
+  top: 4vw;
 }
 
-.main__background--login h3 {
-  position: relative;
-  top: 10vw;
+.main__statistic--title h4 {
+  height: 5.5vw;
   margin: 0;
-  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
-  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-size: 5.5vw;
-  text-shadow: 0px -5px white;
+  text-shadow: 0px 3px #1e00a3;
 }
 
-.main__background--login p {
-  position: relative;
-  top: 10vw;
+.main__statistic--title h4:hover {
+  text-shadow: 0px 2px #1e00a3;
+}
+
+.main__statistic--title p {
   margin: 0;
-  background: -webkit-gradient(linear, left top, left bottom, from(#2500aa), to(rgba(98, 0, 122, 0.9)));
-  background: linear-gradient(#2500aa, rgba(98, 0, 122, 0.9));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   font-size: 2vw;
-  text-shadow: 0px -4px white;
+  font-family: 'Black Han Sans', sans-serif;
+  text-shadow: 0px 2px #1e00a3;
 }
 
-.main__background--login a {
-  position: relative;
-  top: 15vw;
-  padding: 0.5vw 2.5vw;
-  background: -webkit-gradient(linear, left top, left bottom, from(#340086), to(#1e00a3));
-  background: linear-gradient(#340086, #1e00a3);
-  border-radius: 5vw;
-  -webkit-box-shadow: 0px 0.15vw 10px rgba(21, 0, 78, 0.5);
-          box-shadow: 0px 0.15vw 10px rgba(21, 0, 78, 0.5);
-  font-size: 2.75vw;
-  color: white;
-  text-decoration: none;
-  text-align: center;
-  text-shadow: 0px 4px 1px rgba(21, 0, 78, 0.5);
-  -webkit-transition: font-size 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-  transition: font-size 0.3s cubic-bezier(0.215, 0.61, 0.355, 1);
-}
-
-.main__background--login a:hover {
-  font-size: 3vw;
-}
-
-.main__background--login a i {
-  margin: auto 1vw;
-}
-
-.main__register {
-  width: 100vw;
-  height: 55vw;
-  background-image: url(../img/bg_img2.jpg);
-  background-size: 100vw 55vw;
-}
-
-.main__account-info {
-  width: 100vw;
-  height: 40vw;
-  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
-  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
-}
-
-.main__account--element {
-  width: 80vw;
-  height: 17.5vw;
+.main__statistic--element {
+  width: 60vw;
+  height: 10vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -471,54 +419,71 @@ body {
       -ms-flex-align: center;
           align-items: center;
   position: relative;
-  top: 8vw;
+  top: 7.5vw;
   left: 0vw;
   right: 0vw;
   margin: auto;
-  background: white;
-  background-size: cover;
-  border-radius: 2vw;
-  -webkit-box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
-          box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
 }
 
-.main__account--element .account-info {
-  -ms-flex-preferred-size: 20vw;
-      flex-basis: 20vw;
+.main__statistic--element .statistic--option {
+  -ms-flex-preferred-size: 15vw;
+      flex-basis: 15vw;
+  padding-top: 0.6vw;
+  background: white;
+  background-size: cover;
+  border-radius: 25px;
+  -webkit-box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
+          box-shadow: 0px 5px 2px rgba(30, 0, 163, 0.25);
+  text-align: center;
+  -webkit-transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.main__statistic--element .statistic--option i {
   background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
   background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  text-align: center;
-  -webkit-transition: all 0.3s ease-out;
-  transition: all 0.3s ease-out;
-}
-
-.main__account--element .account-info i {
   margin: 0vw auto 0.75vw auto;
-  font-size: 5vw;
+  font-size: 2vw;
 }
 
-.main__account--element .account-info span {
+.main__statistic--element .statistic--option span {
+  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
+  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   display: block;
   margin: 0vw auto;
-  font-size: 2.75vw;
+  font-size: 1.5vw;
 }
 
-.main__account--element .account-info strong {
+.main__statistic--element .statistic--option strong {
+  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
+  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
   width: 12vw;
   margin: 0vw auto;
-  font-family: nanumsquare;
-  font-size: 1vw;
+  font-size: 3vw;
 }
 
-.main__account--element .account-info:hover {
-  -ms-flex-preferred-size: 19vw;
-      flex-basis: 19vw;
+.main__statistic--element .statistic--option:hover {
+  -ms-flex-preferred-size: 17.5vw;
+      flex-basis: 17.5vw;
   margin: 0vw 2vw;
 }
 
-.main__login--title, .main__register--title {
+.main__myinfo {
+  width: 100vw;
+  height: 60vw;
+  background-image: url(../img/bg_img2.jpg);
+  background-size: 100vw 60vw;
+  color: white;
+  text-align: center;
+}
+
+.main__myinfo--title {
   color: white;
   text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
   text-align: center;
@@ -526,36 +491,81 @@ body {
   top: 4vw;
 }
 
-.main__login--title h4, .main__register--title h4 {
+.main__myinfo--title h4 {
   height: 5.5vw;
   margin: 0;
   font-size: 5.5vw;
   text-shadow: 0px 0.3vw #1e00a3;
 }
 
-.main__login--title p, .main__register--title p {
+.main__myinfo--title p {
   margin: 0;
   font-size: 2vw;
   font-family: 'Black Han Sans', sans-serif;
   text-shadow: 0px 0.2vw #1e00a3;
 }
 
-.main__login--session, .main__register--session {
-  width: 50vw;
-  height: 30vw;
+.main__myinfo--section {
+  width: 80vw;
+  height: 20vw;
   position: relative;
   top: 7vw;
   margin: auto;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  -ms-grid-rows: 1fr 1fr 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   background: white;
   border-radius: 2.5vw;
-  -webkit-box-shadow: 0vw 0.25vw 0.3vw rgba(30, 0, 163, 0.5);
-          box-shadow: 0vw 0.25vw 0.3vw rgba(30, 0, 163, 0.5);
   text-align: center;
 }
 
-.main__login--session form, .main__register--session form {
-  width: 25vw;
-  height: 20vw;
+.myinfo--option.profile {
+  -ms-grid-column: 1;
+  -ms-grid-column-span: 1;
+  grid-column: 1 / 2;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 5;
+  grid-row: 1 / 6;
+}
+
+.myinfo--option.profile i {
+  padding: 22.5%;
+  margin: 21% 0vw;
+  font-size: 6vw;
+  background-color: rgba(68, 0, 196, 0.5);
+  border-radius: 2.5vw;
+}
+
+.myinfo--option.nickname {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-column: 2 / 4;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1 / 3;
+  margin-left: 1vw;
+  text-align: left;
+}
+
+.myinfo--option.nickname h5 {
+  margin: 3vw 0vw 0vw 0vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
+  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 4vw;
+}
+
+.myinfo--option.detail {
+  -ms-grid-column: 2;
+  -ms-grid-column-span: 2;
+  grid-column: 2 / 4;
+  -ms-grid-row: 3;
+  -ms-grid-row-span: 2;
+  grid-row: 3 / 5;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -563,119 +573,43 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
-  -webkit-box-align: center;
-      -ms-flex-align: center;
-          align-items: center;
-  position: relative;
-  top: 3.5vw;
-  margin: auto;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  margin-left: 1vw;
+  text-align: left;
 }
 
-.main__login--session label, .main__register--session label {
-  padding: 0.4vw 3vw 0vw 4vw;
-  background: -webkit-gradient(linear, left top, left bottom, from(#1d20ca), to(#b72ec4));
-  background: linear-gradient(#1d20ca, #b72ec4);
+.myinfo--option.detail span {
+  margin-left: 0.8vw;
+  color: #4400c2;
+  font-size: 1.5vw;
+  font-family: 'Nanumsquare', sans-serif;
+}
+
+.myinfo--option.detail i {
+  padding: 0.4vw 0.4vw;
   border-radius: 2vw;
-  position: relative;
-  left: 0.2vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#2500aa), to(rgba(98, 0, 122, 0.9)));
+  background: linear-gradient(#2500aa, rgba(98, 0, 122, 0.9));
   color: white;
-  vertical-align: middle;
-}
-
-.main__login--session label span, .main__register--session label span {
-  font-family: 'Bebas Neue', sans-serif;
-  font-weight: 100;
-}
-
-.main__login--session i, .main__register--session i {
   font-size: 1.25vw;
-  position: relative;
-  top: -0.15vw;
-  right: 0.75vw;
 }
 
-.main__login--session p.check-valid, .main__register--session p.check-valid {
-  position: relative;
-  bottom: 5.25vw;
-  color: #340086;
-  font-family: nanumsquare;
-  font-size: 1vw;
-}
-
-.main__login--session input, .main__register--session input {
-  width: 25vw;
-  height: 3vw;
-  margin: 1vw auto 3vw auto;
-  border: 0px;
-  border-bottom: 1px solid #1e00a3;
-  font-size: 2vw;
-  text-align: center;
-  color: #1e00a3;
-  -webkit-transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.main__login--session input::-webkit-input-placeholder, .main__register--session input::-webkit-input-placeholder {
-  font-size: 1.75vw;
-  color: rgba(30, 0, 163, 0.1);
-}
-
-.main__login--session input:-ms-input-placeholder, .main__register--session input:-ms-input-placeholder {
-  font-size: 1.75vw;
-  color: rgba(30, 0, 163, 0.1);
-}
-
-.main__login--session input::-ms-input-placeholder, .main__register--session input::-ms-input-placeholder {
-  font-size: 1.75vw;
-  color: rgba(30, 0, 163, 0.1);
-}
-
-.main__login--session input::placeholder, .main__register--session input::placeholder {
-  font-size: 1.75vw;
-  color: rgba(30, 0, 163, 0.1);
-}
-
-.main__login--session input:focus, .main__register--session input:focus {
-  outline: none;
-  width: 20vw;
-}
-
-.main__login--btn, .main__register--btn {
-  width: 20vw;
-  height: 4vw;
-  padding: 0.5vw 0vw;
-  position: relative;
-  top: 1vw;
-  background: -webkit-gradient(linear, left top, left bottom, from(#272aff), to(#ef3cff));
-  background: linear-gradient(#272aff, #ef3cff);
-  border: 0px;
-  border-radius: 2vw;
-  -webkit-box-shadow: 0vw 0.2vw 0.1vw rgba(117, 0, 146, 0.75);
-          box-shadow: 0vw 0.2vw 0.1vw rgba(117, 0, 146, 0.75);
-  color: white;
-  text-shadow: 0px 0.2vw 2px rgba(67, 0, 190, 0.3);
-  font-size: 2vw;
-  -webkit-transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-}
-
-.main__login--btn:hover, .main__register--btn:hover {
-  width: 13vw;
-  font-size: 1.8vw;
-}
-
-.main__login--btn i, .main__register--btn i {
-  position: relative;
-  top: 0.05vw;
-  right: 0.75vw;
-  font-size: 1.75vw;
-}
-
-.main__footer {
-  width: 100vw;
-  height: 10vw;
-  text-align: center;
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(40%, rgba(98, 0, 122, 0.9)), to(#2500aa));
-  background: linear-gradient(rgba(98, 0, 122, 0.9) 40%, #2500aa);
+.myinfo--option.decoration {
+  -ms-grid-column: 5;
+  -ms-grid-column-span: 1;
+  grid-column: 5 / 6;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 5;
+  grid-row: 1 / 6;
+  width: 30%;
+  margin-left: 70%;
+  border-radius: 0vw 2.5vw 2.5vw 0vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
+  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
 }
 /*# sourceMappingURL=mypage.css.map */

@@ -57,21 +57,33 @@
                 <p>미니게임 센터 회원가입</p>
             </div>
             <div class="main__register--session">
-                <form action="/register" method="POST">
+                <form id="register-form" action="/register/validation" method="POST">
                     <label for="username">
                         <i class="fa-solid fa-user-check"> <span>Username</span> </i>
                     </label>
-                    <input type="username" name="username" placeholder="Username" autofocus required>
+                    {{form.username()}}
                     <label for="password">
                         <i class="fa-solid fa-unlock-keyhole"> <span>Password</span> </i>
                     </label>
-                    <input type="password" name="password" placeholder="Password" autofocus required>
+                    {{form.password()}}
                     <label for="email">
                         <i class="fa-solid fa-envelope"> <span>E-mail</span> </i>
                     </label>
-                    <input type="email" name="email" placeholder="e-mail" autofocus required>
+                    {{form.email()}}
                     <button type="submit" class="main__register--btn"><i class="fa-solid fa-right-to-bracket"></i>Sign up</button>
-                    <p class="check-valid">{{ msg }}</p>
+                    <p class="check-valid">회원가입을 하시려면 ID와 PW를 입력해주세요.</p>
+                </form>
+            </div>
+            <div class="main__register--confirm not-submitted">
+                <i class="fa-solid fa-circle-check"></i>
+                <h4>Check Your Confirm Email</h4>
+                <p>입력하신 이메일로 <strong>인증 번호</strong>가 전송되었습니다.</p>
+                <p>메일에 첨부한 <strong> 인증 URL</strong>로 접속하여 계정 생성을 마쳐 주세요.</p>
+                <form id="register-confirm-form" action="/register/confirm" method="POST">
+                    <label for="confirm-password">
+                        <i class="fa-solid fa-user-check"> <span>Username</span> </i>
+                    </label>
+                    <!-- {{form.confirm-password()}} -->
                 </form>
             </div>
         </div>
@@ -86,6 +98,7 @@
                 <p>Contact author for more information. <strong>gwangin1999@naver.com</strong></p>
             </div>
         </footer>
+        <script type="module" src="../static/js/register.js"></script>
     </div>
 </body>
 </html>

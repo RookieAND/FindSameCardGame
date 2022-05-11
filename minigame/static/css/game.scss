@@ -37,32 +37,7 @@
 }
 
 .main__mybest--title {
-    color: $color-white;
-    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
-    text-align: center;
-
-    position: relative;
-    top: 4vw;
-
-    h4 {
-        height: 5.5vw;
-        margin: 0;
-
-        font-size: 5.5vw;
-        text-shadow: 0px 3px rgb(30, 0, 163);
-
-        &:hover {
-            text-shadow: 0px 2px rgb(30, 0, 163);
-        }
-    }
-
-    p {
-        margin: 0;
-
-        font-size: 2vw;
-        font-family: 'Black Han Sans', sans-serif;
-        text-shadow: 0px 2px rgb(30, 0, 163);
-    }
+    @include section-gradient-title;
 }
 
 .main__mybest--element {
@@ -123,7 +98,7 @@
     height: 80vw;
 
     background-image: url(../img/bg_img2.jpg);
-    background-size: cover;
+    background-size: 100vw 80vw;
 
     color: rgb(255, 255, 255);
 
@@ -131,34 +106,7 @@
 }
 
 .main__minigame--title {
-    color: $color-white;
-    text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
-    text-align: center;
-
-    position: relative;
-    top: 4vw;
-
-    h4 {
-        height: 5.5vw;
-        margin: 0;
-
-        @include space-darken-gradient;
-        text-shadow: 0px -4px $color-white;
-        font-size: 5.5vw;
-
-        &:hover {
-            text-shadow: 0px -2px $color-white;
-        }
-    }
-
-    p {
-        margin: 0;
-
-        @include space-darken-gradient;
-        text-shadow: 0px -2px $color-white;
-        font-size: 2vw;
-        font-family: 'Black Han Sans', sans-serif;
-    }
+    @include section-image-title;
 }
 
 .main__minigame--status {

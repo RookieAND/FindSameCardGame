@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Black+Han+Sans&family=Noto+Sans+KR:wght@100;300;400;500;700;900&family=Oswald:wght@200;400;700&family=Secular+One&family=Source+Sans+Pro&family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap");
+@import url("https://cdn.jsdelivr.net/gh/moonspam/NanumSquare@1.0/nanumsquare.css");
 html {
   font-family: sans-serif;
   -ms-text-size-adjust: 100%;
@@ -129,18 +130,14 @@ body {
   height: 5.5vw;
   margin: 0;
   font-size: 5.5vw;
-  text-shadow: 0px 3px #1e00a3;
-}
-
-.main__information--title h4:hover {
-  text-shadow: 0px 2px #1e00a3;
+  text-shadow: 0px 0.3vw #1e00a3;
 }
 
 .main__information--title p {
   margin: 0;
   font-size: 2vw;
   font-family: 'Black Han Sans', sans-serif;
-  text-shadow: 0px 2px #1e00a3;
+  text-shadow: 0px 0.2vw #1e00a3;
 }
 
 .main__information--element {
@@ -193,7 +190,7 @@ body {
 .main__information--element .information--guide p {
   width: 12vw;
   margin: 0vw auto;
-  font-family: nanumsquare;
+  font-family: 'NanumSquare', sans-serif;
   font-size: 1vw;
 }
 
@@ -367,7 +364,6 @@ body {
   height: 2.5vw;
   margin: 2vw 4vw 1vw 4vw;
   font-size: 2vw;
-  text-shadow: 0px 2px 1px #1f008d;
   line-height: 2.5vw;
 }
 
@@ -508,7 +504,7 @@ body {
 .main__account--element .account-info strong {
   width: 12vw;
   margin: 0vw auto;
-  font-family: nanumsquare;
+  font-family: 'NanumSquare', sans-serif;
   font-size: 1vw;
 }
 
@@ -518,7 +514,7 @@ body {
   margin: 0vw 2vw;
 }
 
-.main__login--title, .main__register--title {
+.main__login--title {
   color: white;
   text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
   text-align: center;
@@ -526,18 +522,52 @@ body {
   top: 4vw;
 }
 
-.main__login--title h4, .main__register--title h4 {
+.main__login--title h4 {
   height: 5.5vw;
   margin: 0;
   font-size: 5.5vw;
   text-shadow: 0px 0.3vw #1e00a3;
 }
 
-.main__login--title p, .main__register--title p {
+.main__login--title p {
   margin: 0;
   font-size: 2vw;
   font-family: 'Black Han Sans', sans-serif;
   text-shadow: 0px 0.2vw #1e00a3;
+}
+
+.main__register--title {
+  color: white;
+  text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
+  text-align: center;
+  position: relative;
+  top: 4vw;
+}
+
+.main__register--title h4 {
+  height: 5.5vw;
+  margin: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#2500aa), to(rgba(98, 0, 122, 0.9)));
+  background: linear-gradient(#2500aa, rgba(98, 0, 122, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px -4px white;
+  font-size: 5.5vw;
+}
+
+.main__register--title h4:hover {
+  text-shadow: 0px -2px white;
+}
+
+.main__register--title p {
+  margin: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#2500aa), to(rgba(98, 0, 122, 0.9)));
+  background: linear-gradient(#2500aa, rgba(98, 0, 122, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0px -2px white;
+  font-size: 2vw;
+  font-family: 'Black Han Sans', sans-serif;
 }
 
 .main__login--session {
@@ -598,7 +628,7 @@ body {
   position: relative;
   bottom: 5.25vw;
   color: #340086;
-  font-family: nanumsquare;
+  font-family: 'NanumSquare', sans-serif;
   font-size: 1vw;
 }
 
@@ -641,7 +671,7 @@ body {
 }
 
 .main__register--session {
-  width: 50vw;
+  width: 40vw;
   height: 40vw;
   position: relative;
   top: 7vw;
@@ -653,9 +683,13 @@ body {
   text-align: center;
 }
 
+.main__register--session.submitted {
+  display: none;
+}
+
 .main__register--session form {
   width: 25vw;
-  height: 20vw;
+  height: 33vw;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -698,7 +732,7 @@ body {
   position: relative;
   bottom: 5.25vw;
   color: #340086;
-  font-family: nanumsquare;
+  font-family: 'NanumSquare', sans-serif;
   font-size: 1vw;
 }
 
@@ -745,7 +779,7 @@ body {
   height: 4vw;
   padding: 0.5vw 0vw;
   position: relative;
-  top: 1vw;
+  top: 1.5vw;
   background: -webkit-gradient(linear, left top, left bottom, from(#272aff), to(#ef3cff));
   background: linear-gradient(#272aff, #ef3cff);
   border: 0px;
@@ -769,6 +803,136 @@ body {
   top: 0.05vw;
   right: 0.75vw;
   font-size: 1.75vw;
+}
+
+.main__register--confirm {
+  width: 50vw;
+  height: 35vw;
+  position: relative;
+  top: 7vw;
+  margin: auto;
+  background: white;
+  border-radius: 2.5vw;
+  -webkit-box-shadow: 0vw 0.25vw 0.3vw rgba(30, 0, 163, 0.5);
+          box-shadow: 0vw 0.25vw 0.3vw rgba(30, 0, 163, 0.5);
+  text-align: center;
+}
+
+.main__register--confirm.not-submitted {
+  display: none;
+}
+
+.main__register--confirm h4 {
+  position: relative;
+  top: 4.5vw;
+  margin: 0;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
+  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 4vw;
+}
+
+.main__register--confirm p {
+  position: relative;
+  top: 5vw;
+  margin: 0;
+  color: #6800bd;
+  font-size: 1vw;
+  font-family: 'Nanumsquare', sans-serif;
+}
+
+.main__register--confirm strong {
+  font-weight: 800;
+}
+
+.main__register--confirm i {
+  position: relative;
+  top: 3.5vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
+  background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 10vw;
+}
+
+.main__register--confirm form {
+  width: 25vw;
+  height: 10vw;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  position: relative;
+  top: 7.5vw;
+  margin: auto;
+}
+
+.main__register--confirm label {
+  padding: 0.4vw 3vw 0vw 4vw;
+  background: -webkit-gradient(linear, left top, left bottom, from(#1d20ca), to(#b72ec4));
+  background: linear-gradient(#1d20ca, #b72ec4);
+  border-radius: 2vw;
+  position: relative;
+  left: 0.2vw;
+  vertical-align: middle;
+}
+
+.main__register--confirm label span {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 2vw;
+  font-weight: 100;
+}
+
+.main__register--confirm label i {
+  font-size: 1.25vw;
+  position: relative;
+  top: -0.15vw;
+  right: 0.75vw;
+}
+
+.main__register--confirm input {
+  width: 25vw;
+  height: 3vw;
+  margin: 1vw auto 3vw auto;
+  border: 0px;
+  border-bottom: 1px solid #1e00a3;
+  font-size: 2vw;
+  text-align: center;
+  color: #1e00a3;
+  -webkit-transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
+}
+
+.main__register--confirm input::-webkit-input-placeholder {
+  font-size: 1.75vw;
+  color: rgba(30, 0, 163, 0.1);
+}
+
+.main__register--confirm input:-ms-input-placeholder {
+  font-size: 1.75vw;
+  color: rgba(30, 0, 163, 0.1);
+}
+
+.main__register--confirm input::-ms-input-placeholder {
+  font-size: 1.75vw;
+  color: rgba(30, 0, 163, 0.1);
+}
+
+.main__register--confirm input::placeholder {
+  font-size: 1.75vw;
+  color: rgba(30, 0, 163, 0.1);
+}
+
+.main__register--confirm input:focus {
+  outline: none;
+  width: 20vw;
 }
 
 .main__footer {
