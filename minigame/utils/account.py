@@ -32,7 +32,7 @@ def login():
 
             # 해당 ID와 PW를 가진 계정이 있는지, PW가 올바른지를 체크해야 함.
             if not account_login(username, password):
-                flash("입력하신 정보의 계정은 존재하지 않습니다.")
+                flash("해당 계정은 존재하지 않거나 인증되지 않았습니다.")
                 return render_template("login.html", form=form)
 
             session['loggedIn'] = True

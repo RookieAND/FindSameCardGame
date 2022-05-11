@@ -71,20 +71,19 @@
                     </label>
                     {{form.email()}}
                     <button type="submit" class="main__register--btn"><i class="fa-solid fa-right-to-bracket"></i>Sign up</button>
-                    <p class="check-valid">회원가입을 하시려면 ID와 PW를 입력해주세요.</p>
+                    {% with messages = get_flashed_messages()%}
+                        {% if messages %}
+                            <p class="check-valid">{{ messages[0] }}</p>
+                        {% endif %}
+                    {% endwith %}
+<!--                    <p class="check-valid">회원가입을 하시려면 ID와 PW를 입력해주세요.</p>-->
                 </form>
             </div>
             <div class="main__register--confirm not-submitted">
                 <i class="fa-solid fa-circle-check"></i>
                 <h4>Check Your Confirm Email</h4>
-                <p>입력하신 이메일로 <strong>인증 번호</strong>가 전송되었습니다.</p>
-                <p>메일에 첨부한 <strong> 인증 URL</strong>로 접속하여 계정 생성을 마쳐 주세요.</p>
-                <form id="register-confirm-form" action="/register/confirm" method="POST">
-                    <label for="confirm-password">
-                        <i class="fa-solid fa-user-check"> <span>Username</span> </i>
-                    </label>
-                    <!-- {{form.confirm-password()}} -->
-                </form>
+                <p>입력하신 이메일로 <strong>인증 URL</strong>가 전송되었습니다.</p>
+                <p>메일에 첨부한 <strong> 인증 URL</strong>에 접속하여 계정 생성을 마쳐 주세요.</p>
             </div>
         </div>
         <footer class="main__footer">

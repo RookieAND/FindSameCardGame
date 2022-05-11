@@ -356,16 +356,17 @@
 
 .main__register--confirm {
     width: 50vw;
-    height: 35vw;
+    height: 27.5vw;
 
     position: relative;
-    top: 7vw;
+    top: 10vw;
     margin: auto;
 
     background: $color-white; 
     border-radius: 2.5vw;
     box-shadow: 0vw 0.25vw 0.3vw rgba(30, 0, 163, 0.5);
 
+    color:rgb(104, 0, 189);
     text-align: center;
 
     &.not-submitted {
@@ -377,8 +378,6 @@
         top: 4.5vw;
 
         margin: 0;
-        
-        @include space-gradient;
         font-size: 4vw;
     }
 
@@ -391,6 +390,15 @@
         color:rgb(104, 0, 189);
         font-size: 1vw;
         font-family: 'Nanumsquare', sans-serif;
+
+        &.check-confirm {
+            position: relative;
+            top: 1vw;
+            
+            color: rgb(52, 0, 134);
+            font-family: 'NanumSquare', sans-serif;
+            font-size: 1.25vw;
+        }
     }
 
     strong {
@@ -400,73 +408,7 @@
     i {
         position: relative;
         top: 3.5vw;
-
-        @include space-gradient;
         font-size: 10vw;
-    }
-
-    form {
-        width: 25vw;
-        height: 10vw;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        
-        position: relative;
-        top: 7.5vw;
-        margin: auto;
-    }
-    
-    label {
-        padding: 0.4vw 3vw 0vw 4vw;
-        background: linear-gradient(rgb(29, 32, 202), rgb(183, 46, 196));
-        border-radius: 2vw;
-
-        position: relative;
-        left: 0.2vw;
-
-        vertical-align: middle;
-
-        span {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 2vw;
-            font-weight: 100;
-        }
-
-        i {
-            font-size: 1.25vw;
-    
-            position: relative;
-            top: -0.15vw;
-            right: 0.75vw;
-        }
-    }
-
-    input {
-        width: 25vw;
-        height: 3vw;
-
-        margin: 1vw auto 3vw auto;
-
-        border: 0px;
-        border-bottom: 1px solid rgb(30, 0, 163);
-
-        font-size: 2vw;
-        text-align: center;
-
-        color: rgb(30, 0, 163);
-        transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
-
-        &::placeholder {
-            font-size: 1.75vw;
-            color: rgba(30, 0, 163, 0.1)
-        }
-
-        &:focus {
-            outline: none;
-            width: 20vw;
-        }
     }
 }
 

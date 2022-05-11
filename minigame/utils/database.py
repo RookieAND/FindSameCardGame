@@ -33,23 +33,23 @@ def account_exist(player_id: str) -> bool:
     result = cursor.fetchone()
     user_db.close()
 
-    return result
+    return result['is_exists']
 
 
 def account_login(player_id: str, player_pw: str) -> bool:
 
     user_db, cursor = connect_mysql()
     # 해당 ID와 PW를 가진 유저 목록이 있는지를 체크해야 함.
-    sql = """SELECT playerPW FROM playerlist WHERE playerID = %s"""
+    sql = """SELECT isConfirmed, playerPW FROM playerlist WHERE playerID = %s"""
     cursor.execute(sql, player_id)
-    account_pw = cursor.fetchone()
+    account_info = cursor.fetchone()
     user_db.close()
 
-    # 먼저, 해당 ID에 맞는 계정 정보가 존재하는지를 먼저 체크해야 한다.
-    if account_pw:
+    # 먼저, 해당 ID에 맞는 계정 정보가 존재하는지, 인증된 계정인지를 먼저 체크해야 한다.
+    if account_info and account_info['isConfirmed']:
         # DB에서 꺼낸 PW를 byte로 변경한 값과, 입력받은 PW를 byte로 변경한 값이 일치하는지 체크
         player_pw = player_pw.encode('utf-8')
-        check_password = bcrypt.checkpw(player_pw, account_pw['playerPW'].encode('utf-8'))
+        check_password = bcrypt.checkpw(player_pw, account_info['playerPW'].encode('utf-8'))
         # 만약 해당 PW가 서로 일치한다면 True, 일치하지 않는다면 False를 리턴.
         return check_password
     return False
@@ -66,6 +66,34 @@ def account_register(player_id: str, player_pw: str, email: str) -> None:
     user_db.close()
 
 
+def account_is_confirmed(email: str) -> None:
+    user_db, cursor = connect_mysql()
+
+    # 새롭게 입력받은 정보를 정리하여 INSERT 로 계정을 추가함.
+    sql = """SELECT isConfirmed FROM playerlist WHERE playerEmail = %s"""
+    cursor.execute(sql, email)
+    is_confirmed = cursor.fetchone()
+    user_db.close()
+
+    if is_confirmed:
+        return is_confirmed['isConfirmed']
+    return False
+
+
+def account_confirm(email: str) -> None:
+    today = datetime.datetime.now()
+    confirm_date = today.strftime('%Y-%m-%d')
+
+    user_db, cursor = connect_mysql()
+
+    # 새롭게 입력받은 정보를 정리하여 UPDATE 로 값을 변경함.
+    print(confirm_date)
+    sql = "UPDATE playerlist SET playerJoinDate = %s, isConfirmed = 1 WHERE playerEmail = %s"
+    cursor.execute(sql, (confirm_date, email))
+    user_db.commit()
+    user_db.close()
+
+
 def account_change_password(player_id: str, player_pw: str) -> None:
     user_db, cursor = connect_mysql()
 
@@ -74,6 +102,7 @@ def account_change_password(player_id: str, player_pw: str) -> None:
     cursor.execute(sql, (player_pw, player_id))
     user_db.commit()
     user_db.close()
+
 
 # 여기서부터는 스코어와 관련된 함수들을 작성하는 파트 (score, rank, leaderboard)
 

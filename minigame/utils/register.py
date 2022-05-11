@@ -2,9 +2,9 @@ from random import randint
 
 import bcrypt
 
-from minigame.utils.form import RegisterForm, LoginForm, RegConfirmForm
-from minigame.utils.database import account_register, account_exist
-from minigame.utils.email import send_validate_email
+from minigame.utils.form import RegisterForm, LoginForm
+from minigame.utils.database import account_register, account_exist, account_confirm, account_is_confirmed
+from minigame.utils.email import confirm_token, generate_confirmation_token, send_validate_email
 
 from flask import Blueprint, session, url_for, redirect, request, render_template, flash, jsonify
 
@@ -20,6 +20,7 @@ def register():
     # 맨 처음 접속할 경우 GET 메소드로 요청이 오므로, 로그인 템플릿 제공
     form = RegisterForm(request.form)
 
+    flash('회원가입을 위해 필요한 정보를 기입해주세요.')
     return render_template("register.html", form=form)
 
 
@@ -35,27 +36,46 @@ def register_check_vaild():
             'email': form.email.data
         }
 
-        if account_exist(form_info['username'])['is_exists']:
-            return jsonify(result='fail', status=200, reason='해당 ID는 이미 다른 유저가 사용 중입니다.')
+        # 먼저, 해당 계정이 이미 인증되었는지를 체크해야 함.
+        if account_is_confirmed(form_info['email']):
+            flash('해당 ID는 이미 다른 유저가 사용 중입니다.')
+            return render_template('signup.register')
         else:
-            confirm_password = randint(100000, 999999)
-            send_validate_email(form_info['email'], confirm_password)
-            return jsonify(result='success', status=200, confirm_pw=confirm_password)
+            # 만약 계정을 처음 생성하려고 시도했다면, DB에 새롭게 정보를 적재시킴.
+            # 인증 URL이 만료된 케이스의 경우 정보를 적재하지 않고 인증 메일 전송.
+            if not account_exist(form_info['username']):
+                password = (bcrypt.hashpw(form_info['password'].encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
+                account_register(form_info['username'], password, form_info['email'])
 
-    return jsonify(result='fail', status=200, reason='회원가입에 필요한 정보를 모두 올바르게 작성해주세요.')
+            # email을 포함하여 새로운 랜덤 난수 토큰을 생성하고, 이를 url에 할당시킴.
+            token = generate_confirmation_token(form_info['email'])
+            confirm_url = url_for('signup.confirm_verify_email', token=token, _external=True)
+            html = render_template('email.html', confirm_url=confirm_url)
+            subject = "FindSamePicture 미니게임 계정 인증"
+
+            # 제목, html 템플릿, url을 전달하여 사용자에게 인증 메일을 전송함.
+            send_validate_email(form_info['email'], subject, html)
+            return jsonify(result='success', status=200)
+
+    flash('회원가입에 필요한 정보를 모두 올바르게 작성해주세요.')
+    return render_template('signup.register')
 
 
-@signup.route('/register/confirm', methods=['POST'])
-def confirm_verify_email():
+@signup.route('/register/<token>')
+def confirm_verify_email(token):
 
-    regForm = RegConfirmForm(request.form)
+    email = confirm_token(token)
+    # 이메일 기간 만료 시 False 리턴, 이를 체크하여 회원 가입 페이지로 보냄.
+    if not email:
+        flash('URL 인증 기간이 만료되었습니다. 처음부터 진행해주세요.')
+        return redirect(url_for('signup.register'))
 
+    if account_is_confirmed(email):
+        flash('이미 인증이 완료된 계정입니다. 로그인을 해주세요.')
+        return redirect(url_for('account.login'))
+    else:
+        account_confirm(email)
+        flash("가입이 완료되었습니다. 생성된 계정으로 로그인하세요.")
+        return redirect(url_for('account.login'))
 
-    flash("해당 인증 이메일은 이미 만료되었거나 유효하지 않습니다.")
-    # 입력 받은 비밀번호를 String -> Bytes 타입으로 변경 후 Bcrypt 를 사용하여 암호화 진행.
-    # 그 후 암호화 된 데이터를 String으로 복호화 하여 DB에 해당 내용을 저장시킴. (그대로 저장 시 문제 발생)
-    password = (bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
-    account_register(username, password, email)
-    login_form = LoginForm()
-    flash("가입이 완료되었습니다. 생성된 계정으로 로그인하세요.")
-    return render_template("login.html", form=login_form)
+    return redirect(url_for('main.mypage'))

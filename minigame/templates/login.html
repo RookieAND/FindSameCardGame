@@ -45,9 +45,7 @@
                     <button type="submit" class="main__login--btn"><i class="fa-solid fa-right-to-bracket"></i>Sign in</button>
                     {% with messages = get_flashed_messages()%}
                         {% if messages %}
-                            {% for msg in messages %}
-                            <p class="check-valid">{{ msg }}</p>
-                            {% endfor %}
+                            <p class="check-valid">{{ messages[0] }}</p>
                         {% endif %}
                     {% endwith %}
                 </form>
