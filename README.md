@@ -29,7 +29,12 @@ javascript, html, scss 를 활용한 웹앱 기반 같은 카드 찾기 게임 �
 
 ## Version History
 
+* 0.3
+    * Add flask back-end part of minigame Web.
+    * Add email-verification register system.
+    * Add user profile, leaderboard, and statistic.
 * 0.2
+    * Add auto - stage difficulty setting system.
     * Add stage system and combo system.
     * change maximum limit time from 120 to 60.
 * 0.1
