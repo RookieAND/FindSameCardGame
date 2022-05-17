@@ -14,7 +14,7 @@ def main_page():
     return render_template("index.html", **locals())
 
 
-@main.route('/minigame', methods=['GET'])
+@main.route('/minigame')
 def running_game():
     username = session['username']
     total_rank = get_user_rank(username)['ranking']
@@ -50,12 +50,11 @@ def my_page():
     username = session['username']
 
     total_rank = get_user_rank(username)['ranking']
-    total_star = star_get_amount(username)['currentStar']
 
     best_info = get_user_score(username)
     best_score, best_stage = best_info['bestScore'], best_info['bestStage']
 
     player_info = user_profile_info(username)
-    playerJoinDate, playerEmail = player_info['playerJoinDate'], player_info['playerEmail']
+    playerJoinDate, playerEmail, total_star = player_info.items()
 
     return render_template("mypage.html", **locals())

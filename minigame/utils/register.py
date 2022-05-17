@@ -30,31 +30,30 @@ def register_check_vaild():
     form = RegisterForm(request.form)
     # 먼저, form 에 아이디와 비밀번호가 전부 적혔는지를 먼저 체크함.
     if form.validate():
-        form_info = {
-            'username': form.username.data,
-            'password': form.password.data,
-            'email': form.email.data
-        }
+        # form에서 받아온 ID, PW, Email 정보를 저장함.
+        username = form.username.data
+        password = form.password.data
+        email = form.email.data
 
         # 먼저, 해당 계정이 이미 인증되었는지를 체크해야 함.
-        if account_is_confirmed(form_info['email']):
+        if account_is_confirmed(email):
             flash('해당 ID는 이미 다른 유저가 사용 중입니다.')
             return render_template('signup.register')
         else:
             # 만약 계정을 처음 생성하려고 시도했다면, DB에 새롭게 정보를 적재시킴.
             # 인증 URL이 만료된 케이스의 경우 정보를 적재하지 않고 인증 메일 전송.
-            if not account_exist(form_info['username']):
-                password = (bcrypt.hashpw(form_info['password'].encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
-                account_register(form_info['username'], password, form_info['email'])
+            if not account_exist(username):
+                password = (bcrypt.hashpw(password.encode('UTF-8'), bcrypt.gensalt())).decode('utf-8')
+                account_register(username, password, email)
 
             # email을 포함하여 새로운 랜덤 난수 토큰을 생성하고, 이를 url에 할당시킴.
-            token = generate_confirmation_token(form_info['email'])
+            token = generate_confirmation_token(email)
             confirm_url = url_for('signup.confirm_verify_email', token=token, _external=True)
             html = render_template('email.html', confirm_url=confirm_url)
             subject = "FindSamePicture 미니게임 계정 인증"
 
             # 제목, html 템플릿, url을 전달하여 사용자에게 인증 메일을 전송함.
-            send_validate_email(form_info['email'], subject, html)
+            send_validate_email(email, subject, html)
             return jsonify(result='success', status=200)
 
     flash('회원가입에 필요한 정보를 모두 올바르게 작성해주세요.')

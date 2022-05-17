@@ -87,9 +87,10 @@ def account_confirm(email: str) -> None:
     user_db, cursor = connect_mysql()
 
     # 새롭게 입력받은 정보를 정리하여 UPDATE 로 값을 변경함.
-    print(confirm_date)
-    sql = "UPDATE playerlist SET playerJoinDate = %s, isConfirmed = 1 WHERE playerEmail = %s"
-    cursor.execute(sql, (confirm_date, email))
+    sql = """UPDATE playerlist SET playerJoinDate = %s, isConfirmed = 1 WHERE playerEmail = %s
+            INSERT INTO playerstatic(playerID) SELECT playerID FROM playerlist WHERE playerEmail = %s
+            INSERT INTO playerbest(playerID) SELECT playerID FROM playerlist WHERE playerEmail = %s"""
+    cursor.execute(sql, (confirm_date, email, email, email))
     user_db.commit()
     user_db.close()
 
@@ -105,14 +106,12 @@ def account_change_password(player_id: str, player_pw: str) -> None:
 
 
 # 여기서부터는 스코어와 관련된 함수들을 작성하는 파트 (score, rank, leaderboard)
-
-
 # 현재 해당 유저의 최고 점수와 최고 스테이지를 불러오는 함수
 def get_user_score(player_id: str) -> dict:
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지를 쿼리로 받아 온다.
-    sql = """SELECT bestScore, bestStage FROM playerlist where playerID = %s"""
+    sql = """SELECT bestScore, bestStage FROM playerbest where playerID = %s"""
     cursor.execute(sql, player_id)
     data = cursor.fetchone()
     user_db.close()
@@ -127,7 +126,7 @@ def update_user_score(player_id: str, best_score: int, best_stage: int) -> None:
     best_score_date = today.strftime('%Y-%m-%d')
 
     user_db, cursor = connect_mysql()
-    sql = """UPDATE playerlist SET bestScore = %s, bestStage = %s, bestScoreDate = %s WHERE playerID = %s"""
+    sql = """UPDATE playerbest SET bestScore = %s, bestStage = %s, bestScoreDate = %s WHERE playerID = %s"""
 
     cursor.execute(sql, (best_score, best_stage, best_score_date, player_id))
     user_db.commit()
@@ -140,7 +139,7 @@ def get_user_rank(player_id: str) -> dict:
 
     # 전체 중 해당 유저의 등수를 서브 쿼리를 통해 추출하여 받아온다.
     sql = """SELECT ranking
-            FROM (SELECT playerID, RANK() OVER (ORDER BY bestScore DESC) 'ranking' FROM playerlist) rankTBL
+            FROM (SELECT playerID, RANK() OVER (ORDER BY bestScore DESC) 'ranking' FROM playerbest) rankTBL
             WHERE rankTBL.playerID = %s"""
     cursor.execute(sql, player_id)
     data = cursor.fetchone()
@@ -156,7 +155,7 @@ def get_leaderboard() -> dict:
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
     sql = """SELECT RANK() OVER (ORDER BY bestScore DESC) 'rank', playerID, bestScore, bestStage, bestScoreDate
-             FROM playerlist LIMIT 10"""
+             FROM playerbest LIMIT 10"""
 
     cursor.execute(sql)
     data = cursor.fetchall()
@@ -167,7 +166,6 @@ def get_leaderboard() -> dict:
 
 
 # 여기서부터는 스타와 관련된 함수를 기입하는 곳 (보유 스타 확인, 스타 소모, 스타 지급 등..)
-
 # 현재 유저가 보유한 스타의 갯수를 얻어오는 함수.
 def star_get_amount(player_id: str) -> dict:
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
@@ -196,16 +194,15 @@ def star_set_amount(player_id: str, star_amount: int) -> None:
     user_db.commit()
     user_db.close()
 
+
 # 여기서부터는 유저의 개인 정보에 대한 함수 (가입 일자, 이메일 등..)
-
-
 # 현재 유저의 프로필을 보여주기 위해 필요한 정보를 가져오는 함수
 def user_profile_info(player_id: str) -> dict:
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
-    sql = """SELECT playerJoinDate, playerEmail FROM playerlist WHERE playerID = %s"""
+    sql = """SELECT playerJoinDate, playerEmail, currentStar FROM playerlist WHERE playerID = %s"""
 
     cursor.execute(sql, player_id)
     data = cursor.fetchone()

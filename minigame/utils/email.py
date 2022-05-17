@@ -21,11 +21,13 @@ def confirm_token(token, expiration=600):
             max_age=expiration
         )
     # 만약 인증 시간이 다 되었다면, False를 리턴함.
-    except:
+    except SignatureExpired:
         return False
+    # 정상적으로 email 값이 도출되었다면, 이를 리턴함.
     return email
 
 
+# 사전에 전달 받은 html 템플릿, 제목, 이메일을 받아 stmp 서버를 통해 전송하는 함수.
 def send_validate_email(player_email: str, subject: str, template: str):
     mail_msg = Message(subject, html=template,
                        sender=current_app.config['MAIL_USERNAME'], recipients=[player_email])
