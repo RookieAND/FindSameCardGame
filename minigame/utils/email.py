@@ -1,6 +1,6 @@
 from flask import current_app
 from flask_mail import Message, Mail
-from itsdangerous import URLSafeTimedSerializer
+from itsdangerous import URLSafeTimedSerializer, SignatureExpired
 
 mail = Mail()
 

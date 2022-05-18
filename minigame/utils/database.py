@@ -2,6 +2,7 @@ import bcrypt
 import datetime
 import pymysql
 from pymysql import cursors
+from pymysql.constants import CLIENT
 from flask import current_app
 
 
@@ -12,7 +13,8 @@ def connect_mysql() -> tuple:
         user=current_app.config['MYSQL_USER'],
         password=current_app.config['MYSQL_PASSWORD'],
         db=current_app.config['MYSQL_DB'],
-        charset='utf8'
+        charset='utf8',
+        client_flag=CLIENT.MULTI_STATEMENTS
     )
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
     cursor = user_db.cursor(cursors.DictCursor)
@@ -83,13 +85,14 @@ def account_is_confirmed(email: str) -> None:
 def account_confirm(email: str) -> None:
     today = datetime.datetime.now()
     confirm_date = today.strftime('%Y-%m-%d')
+    print(confirm_date)
 
     user_db, cursor = connect_mysql()
 
     # 새롭게 입력받은 정보를 정리하여 UPDATE 로 값을 변경함.
-    sql = """UPDATE playerlist SET playerJoinDate = %s, isConfirmed = 1 WHERE playerEmail = %s
-            INSERT INTO playerstatic(playerID) SELECT playerID FROM playerlist WHERE playerEmail = %s
-            INSERT INTO playerbest(playerID) SELECT playerID FROM playerlist WHERE playerEmail = %s"""
+    sql = """UPDATE playerlist SET playerJoinDate = %s, isConfirmed = 1 WHERE playerEmail = %s;
+            INSERT INTO playerstatic(playerlist_playerID) SELECT playerID FROM playerlist WHERE playerEmail = %s;
+            INSERT INTO playerbest(playerlist_playerID) SELECT playerID FROM playerlist WHERE playerEmail = %s;"""
     cursor.execute(sql, (confirm_date, email, email, email))
     user_db.commit()
     user_db.close()
@@ -111,7 +114,8 @@ def get_user_score(player_id: str) -> dict:
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지를 쿼리로 받아 온다.
-    sql = """SELECT bestScore, bestStage FROM playerbest where playerID = %s"""
+    sql = """SELECT bestScore, bestStage FROM playerbest 
+             WHERE playerlist_playerID = %s"""
     cursor.execute(sql, player_id)
     data = cursor.fetchone()
     user_db.close()
@@ -126,7 +130,8 @@ def update_user_score(player_id: str, best_score: int, best_stage: int) -> None:
     best_score_date = today.strftime('%Y-%m-%d')
 
     user_db, cursor = connect_mysql()
-    sql = """UPDATE playerbest SET bestScore = %s, bestStage = %s, bestScoreDate = %s WHERE playerID = %s"""
+    sql = """UPDATE playerbest SET bestScore = %s, bestStage = %s, bestScoreDate = %s 
+             WHERE playerlist_playerID = %s"""
 
     cursor.execute(sql, (best_score, best_stage, best_score_date, player_id))
     user_db.commit()
@@ -139,7 +144,7 @@ def get_user_rank(player_id: str) -> dict:
 
     # 전체 중 해당 유저의 등수를 서브 쿼리를 통해 추출하여 받아온다.
     sql = """SELECT ranking
-            FROM (SELECT playerID, RANK() OVER (ORDER BY bestScore DESC) 'ranking' FROM playerbest) rankTBL
+            FROM (SELECT playerlist_playerID, RANK() OVER (ORDER BY bestScore DESC) 'ranking' FROM playerbest) rankTBL
             WHERE rankTBL.playerID = %s"""
     cursor.execute(sql, player_id)
     data = cursor.fetchone()
@@ -154,9 +159,8 @@ def get_leaderboard() -> dict:
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
-    sql = """SELECT RANK() OVER (ORDER BY bestScore DESC) 'rank', playerID, bestScore, bestStage, bestScoreDate
-             FROM playerbest LIMIT 10"""
-
+    sql = """SELECT RANK() OVER (ORDER BY bestScore DESC) 'rank', playerlist_playerID, bestScore,
+             bestStage, bestScoreDate FROM playerbest LIMIT 10"""
     cursor.execute(sql)
     data = cursor.fetchall()
     user_db.close()
