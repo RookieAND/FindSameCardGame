@@ -19,8 +19,6 @@ def register():
 
     # 맨 처음 접속할 경우 GET 메소드로 요청이 오므로, 로그인 템플릿 제공
     form = RegisterForm(request.form)
-
-    flash('회원가입을 위해 필요한 정보를 기입해주세요.')
     return render_template("register.html", form=form)
 
 
@@ -37,8 +35,7 @@ def register_check_vaild():
 
         # 먼저, 해당 계정이 이미 인증되었는지를 체크해야 함.
         if account_is_confirmed(email):
-            flash('해당 ID는 이미 다른 유저가 사용 중입니다.')
-            return jsonify(result='fail', status=200)
+            return jsonify(result='fail', errcode='002', status=200)
         else:
             # 만약 계정을 처음 생성하려고 시도했다면, DB에 새롭게 정보를 적재시킴.
             # 인증 URL이 만료된 케이스의 경우 정보를 적재하지 않고 인증 메일 전송.
@@ -56,8 +53,7 @@ def register_check_vaild():
             send_validate_email(email, subject, html)
             return jsonify(result='success', status=200)
 
-    flash('회원가입에 필요한 정보를 모두 올바르게 작성해주세요.')
-    return jsonify(result='fail', status=200)
+    return jsonify(result='fail', errcode='001', status=200)
 
 
 @signup.route('/register/<token>')

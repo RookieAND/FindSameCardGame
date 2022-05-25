@@ -71,12 +71,7 @@
                     </label>
                     {{form.email()}}
                     <button type="submit" class="main__register--btn"><i class="fa-solid fa-right-to-bracket"></i>Sign up</button>
-                    {% with messages = get_flashed_messages()%}
-                        {% if messages %}
-                            <p class="check-valid">{{ messages[0] }}</p>
-                        {% endif %}
-                    {% endwith %}
-<!--                    <p class="check-valid">회원가입을 하시려면 ID와 PW를 입력해주세요.</p>-->
+                    <p class="check-valid">회원가입에 필요한 정보를 입력해주세요.</p>
                 </form>
             </div>
             <div class="main__register--confirm not-submitted">

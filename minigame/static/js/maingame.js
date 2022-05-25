@@ -16,7 +16,7 @@ const gameFrame = document.querySelector(".main__minigame--main");
 const gameNextStage = document.querySelector(".main__minigame--next-stage");
 const gameEndLobby = document.querySelector(".main__minigame--end");
 
-const GAME_PLAYTIME = 3000;
+const GAME_PLAYTIME = 60000;
 const GAME_BONUSTIME = 15000;
 
 import flipCard from "./flipcard.js";
@@ -121,7 +121,7 @@ class GameStatue {
     // 만약 최고 기록이 갱신되었다면, 이 기록을 display 에 업데이트 해주어야 함.
     checkNewBestScore = async() => {
         const result = await this.sendResult2Server();
-        if (Object.keys(result).length === 0) {
+        if (Object.keys(result).length !== 0) {
             [...Object.keys(result)].forEach(data => {
                 const bestDisplayNode = document.querySelector(`.mybest--guide.${data} strong`);
                 bestDisplayNode.innerText = result[data];
