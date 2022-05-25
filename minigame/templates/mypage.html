@@ -70,11 +70,15 @@
                         <i class="fa-solid fa-right-to-bracket"></i><span>{{playerJoinDate}}</span>
                     </div>
                     <div class="detail-list">
-                        <i class="fa-solid fa-star"></i><span>{{"{:,}".format(total_star)}} 개</span>
+                        <i class="fa-solid fa-star"></i><span>{{total_star}} 개</span>
                     </div>
                 </div>
+                <div class="myinfo--option tier">
+                    <i id="tier-icon" class="fa-solid"></i>
+                    <h5 id="tier-name"></h5>
+                    <span id="tier-percent">상위 <strong>1.52</strong>%</span>
+                </div>
                 <div class="myinfo--option decoration">
-
                 </div>
             </div>
         </div>
@@ -92,6 +96,7 @@
                 <p>Contact author for more information. <strong>gwangin1999@naver.com</strong></p>
             </div>
         </footer>
+        <script type="module" src="../static/js/tier.js"></script>
     </div>
 </body>
 </html>

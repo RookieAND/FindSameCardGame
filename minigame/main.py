@@ -1,7 +1,6 @@
 from flask import Blueprint, request, jsonify
 from flask import render_template, session
-from minigame.utils.database \
-    import (get_user_score, update_user_score, get_leaderboard, get_user_rank, star_get_amount, user_profile_info)
+from minigame.utils.database import *
 
 main = Blueprint('main', __name__, url_prefix='/')
 
@@ -36,8 +35,8 @@ def get_game_result():
 
         # front-end에 새롭게 갱신할 단위가 담긴 데이터를 전송
         data = {
-            'rank': get_user_rank(username)['ranking'],
-            'score': result_score,
+            'rank': "# {0}".format(get_user_rank(username)['ranking']),
+            'score': "{0:,}".format(result_score),
             'stage': result_stage
         }
 
@@ -50,11 +49,19 @@ def my_page():
     username = session['username']
 
     total_rank = get_user_rank(username)['ranking']
-
     best_info = get_user_score(username)
     best_score, best_stage = best_info['bestScore'], best_info['bestStage']
 
+    total_star = star_get_amount(username)['currentStar']
     player_info = user_profile_info(username)
-    playerJoinDate, playerEmail, total_star = player_info.items()
+    playerJoinDate, playerEmail = player_info['playerJoinDate'], player_info['playerEmail']
 
     return render_template("mypage.html", **locals())
+
+
+@main.route('/mypage/settier', methods=['POST'])
+def my_tier():
+    username = session['username']
+    percent = get_user_percent(username)
+    print(percent)
+    return jsonify({'percent': percent}), 200

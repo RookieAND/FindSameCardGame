@@ -131,7 +131,7 @@ def update_user_score(player_id: str, best_score: int, best_stage: int) -> None:
 
     user_db, cursor = connect_mysql()
     sql = """UPDATE playerbest SET bestScore = %s, bestStage = %s, bestScoreDate = %s 
-             WHERE playerlist_playerID = %s"""
+            WHERE playerlist_playerID = %s"""
 
     cursor.execute(sql, (best_score, best_stage, best_score_date, player_id))
     user_db.commit()
@@ -143,15 +143,29 @@ def get_user_rank(player_id: str) -> dict:
     user_db, cursor = connect_mysql()
 
     # 전체 중 해당 유저의 등수를 서브 쿼리를 통해 추출하여 받아온다.
-    sql = """SELECT ranking
+    sql = """SELECT ranking 
             FROM (SELECT playerlist_playerID, RANK() OVER (ORDER BY bestScore DESC) 'ranking' FROM playerbest) rankTBL
-            WHERE rankTBL.playerID = %s"""
+            WHERE rankTBL.playerlist_playerID = %s"""
     cursor.execute(sql, player_id)
     data = cursor.fetchone()
     user_db.close()
 
     if data:
         return data
+
+
+def get_user_percent(player_id: str) -> dict:
+    user_db, cursor = connect_mysql()
+
+    # 전체 중 해당 유저의 등수를 서브 쿼리를 통해 추출하여 받아온다.
+    sql = """SELECT percent FROM (SELECT playerlist_playerID, ROUND(PERCENT_RANK() OVER (ORDER BY bestScore), 2)
+            AS 'percent' FROM playerbest) pctTBL WHERE pctTBL.playerlist_playerID = %s"""
+    cursor.execute(sql, player_id)
+    data = cursor.fetchone()
+    user_db.close()
+
+    if data:
+        return 100 - data['percent'] * 100
 
 
 def get_leaderboard() -> dict:
@@ -206,7 +220,7 @@ def user_profile_info(player_id: str) -> dict:
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
-    sql = """SELECT playerJoinDate, playerEmail, currentStar FROM playerlist WHERE playerID = %s"""
+    sql = """SELECT playerJoinDate, playerEmail FROM playerlist WHERE playerID = %s"""
 
     cursor.execute(sql, player_id)
     data = cursor.fetchone()

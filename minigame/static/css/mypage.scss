@@ -106,7 +106,7 @@
 }
 
 .main__myinfo--section {
-    width: 80vw;
+    width: 75vw;
     height: 20vw;
 
     position: relative;
@@ -193,5 +193,30 @@
         border-radius: 0vw 2.5vw 2.5vw 0vw;
 
         background: $color-space;
+    }
+
+    &.tier {
+        grid-column: 4 / 6;
+        grid-row: 2 / 5;
+
+        color:rgb(68, 0, 196);
+
+        i {
+            font-size: 8vw;
+        }
+        
+        h5 {
+            margin: 0.25vw;
+            font-size: 3vw;
+        }
+
+        span {
+            padding: 0.25vw 1vw;
+            border-radius: 5vw;
+
+            color: $color-white;
+            font-size: 1vw;
+            font-family: 'Nanumsquare', sans-serif;
+        }
     }
 }

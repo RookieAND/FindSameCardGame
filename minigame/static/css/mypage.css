@@ -506,7 +506,7 @@ body {
 }
 
 .main__myinfo--section {
-  width: 80vw;
+  width: 75vw;
   height: 20vw;
   position: relative;
   top: 7vw;
@@ -611,5 +611,32 @@ body {
   border-radius: 0vw 2.5vw 2.5vw 0vw;
   background: -webkit-gradient(linear, left top, left bottom, from(#3000df), to(rgba(154, 0, 192, 0.9)));
   background: linear-gradient(#3000df, rgba(154, 0, 192, 0.9));
+}
+
+.myinfo--option.tier {
+  -ms-grid-column: 4;
+  -ms-grid-column-span: 2;
+  grid-column: 4 / 6;
+  -ms-grid-row: 2;
+  -ms-grid-row-span: 3;
+  grid-row: 2 / 5;
+  color: #4400c4;
+}
+
+.myinfo--option.tier i {
+  font-size: 8vw;
+}
+
+.myinfo--option.tier h5 {
+  margin: 0.25vw;
+  font-size: 3vw;
+}
+
+.myinfo--option.tier span {
+  padding: 0.25vw 1vw;
+  border-radius: 5vw;
+  color: white;
+  font-size: 1vw;
+  font-family: 'Nanumsquare', sans-serif;
 }
 /*# sourceMappingURL=mypage.css.map */

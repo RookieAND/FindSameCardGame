@@ -3,7 +3,7 @@ from flask import Flask
 from minigame.config.default import config_by_name
 from minigame.utils.account import account
 from minigame.utils.register import signup
-from minigame.user_page import main
+from minigame.main import main
 from minigame.utils.email import mail
 
 
