@@ -49,12 +49,11 @@ def my_page():
     username = session['username']
 
     total_rank = get_user_rank(username)['ranking']
-    best_info = get_user_score(username)
-    best_score, best_stage = best_info['bestScore'], best_info['bestStage']
+    profile_info = user_profile_info(username)
 
-    total_star = star_get_amount(username)['currentStar']
-    player_info = user_profile_info(username)
-    playerJoinDate, playerEmail = player_info['playerJoinDate'], player_info['playerEmail']
+    best_score, best_stage = profile_info['bestScore'], profile_info['bestStage']
+    playerJoinDate, playerEmail = profile_info['playerJoinDate'], profile_info['playerEmail']
+    totalLevel, totalExp = profile_info['totalLevel'], profile_info['totalGetExp']
 
     return render_template("mypage.html", **locals())
 
@@ -63,5 +62,16 @@ def my_page():
 def my_tier():
     username = session['username']
     percent = get_user_percent(username)
-    print(percent)
     return jsonify({'percent': percent}), 200
+
+
+@main.route('/mypage/progress', methods=['POST'])
+def my_level():
+    username = session['username']
+    level_info = get_user_levelexp(username)
+    data = {
+        'level': level_info['totalLevel'],
+        'exp': level_info['totalGetExp']
+    }
+
+    return jsonify(data), 200

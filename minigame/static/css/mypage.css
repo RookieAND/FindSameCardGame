@@ -639,4 +639,50 @@ body {
   font-size: 1vw;
   font-family: 'Nanumsquare', sans-serif;
 }
+
+.main__myinfo--level {
+  width: 75vw;
+  height: 10vw;
+  position: relative;
+  top: 8vw;
+  margin: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  text-align: left;
+}
+
+.main__myinfo--level h5 {
+  margin: 0.35vw 2.75vw 0.75vw 2.75vw;
+  font-size: 2.75vw;
+}
+
+.myinfo--levelgraph {
+  width: 72vw;
+  height: 3vw;
+  margin: 0vw 1.5vw;
+  background-color: #350098;
+  border-radius: 5vw;
+}
+
+.myinfo--levelgraph h5 {
+  margin: 0.4vw 2vw;
+  position: relative;
+  bottom: 3vw;
+  color: white;
+  text-align: right;
+  font-size: 2vw;
+}
+
+.myinfo--progress {
+  width: 0%;
+  height: 3vw;
+  background: -webkit-gradient(linear, left top, right top, from(#3000df), to(rgba(154, 0, 192, 0.9)));
+  background: linear-gradient(90deg, #3000df, rgba(154, 0, 192, 0.9));
+  border-radius: 5vw;
+}
 /*# sourceMappingURL=mypage.css.map */

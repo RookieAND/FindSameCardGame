@@ -220,3 +220,50 @@
         }
     }
 }
+
+.main__myinfo--level {
+    width: 75vw;
+    height: 10vw;
+
+    position: relative;
+    top: 8vw;
+    margin: auto;
+
+    display: flex;
+    flex-direction: column;
+
+    text-align: left;
+
+    h5 {
+        margin: 0.35vw 2.75vw 0.75vw 2.75vw;
+        font-size: 2.75vw;
+    }
+}
+
+.myinfo--levelgraph {
+    width: 72vw;
+    height: 3vw;
+
+    margin: 0vw 1.5vw;
+
+    background-color: rgb(53, 0, 152);
+    border-radius: 5vw;
+
+    h5 {
+        margin: 0.4vw 2vw;
+        position: relative;
+        bottom: 3vw;
+        
+        color: $color-white;
+        text-align: right;
+        font-size: 2vw;
+    }
+}
+
+.myinfo--progress {
+    width: 0%;
+    height: 3vw;
+
+    background: linear-gradient(90deg,rgb(48, 0, 223), rgba(154, 0, 192, 0.9));
+    border-radius: 5vw;
+}

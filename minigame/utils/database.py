@@ -20,6 +20,7 @@ def connect_mysql() -> tuple:
     cursor = user_db.cursor(cursors.DictCursor)
     return user_db, cursor
 
+
 # 여기서부터는 계정과 관련된 함수들을 작성하는 파트 (계정이 존재하는지에 대한 여부, 로그인 적합성 판별 여부)
 
 
@@ -39,7 +40,6 @@ def account_exist(player_id: str) -> bool:
 
 
 def account_login(player_id: str, player_pw: str) -> bool:
-
     user_db, cursor = connect_mysql()
     # 해당 ID와 PW를 가진 유저 목록이 있는지를 체크해야 함.
     sql = """SELECT isConfirmed, playerPW FROM playerlist WHERE playerID = %s"""
@@ -158,7 +158,7 @@ def get_user_percent(player_id: str) -> dict:
     user_db, cursor = connect_mysql()
 
     # 전체 중 해당 유저의 등수를 서브 쿼리를 통해 추출하여 받아온다.
-    sql = """SELECT percent FROM (SELECT playerlist_playerID, ROUND(PERCENT_RANK() OVER (ORDER BY bestScore), 2)
+    sql = """SELECT percent FROM (SELECT playerlist_playerID, ROUND(PERCENT_RANK() OVER (ORDER BY bestScore), 4)
             AS 'percent' FROM playerbest) pctTBL WHERE pctTBL.playerlist_playerID = %s"""
     cursor.execute(sql, player_id)
     data = cursor.fetchone()
@@ -183,14 +183,14 @@ def get_leaderboard() -> dict:
         return data
 
 
-# 여기서부터는 스타와 관련된 함수를 기입하는 곳 (보유 스타 확인, 스타 소모, 스타 지급 등..)
-# 현재 유저가 보유한 스타의 갯수를 얻어오는 함수.
-def star_get_amount(player_id: str) -> dict:
+# 여기서부터는 레벨과 관련된 함수를 기입하는 곳 (레벨 업 여부, 현재 보유 경험치 및 레벨 체크)
+# 현재 유저가 보유한 경험치의 수량을 얻어오는 함수.
+def get_user_levelexp(player_id: str) -> dict:
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
-    sql = """SELECT currentStar FROM playerlist WHERE playerID = %s"""
+    sql = """SELECT totalGetExp, totalLevel FROM playerstatic WHERE playerlist_playerID = %s"""
 
     cursor.execute(sql, player_id)
     data = cursor.fetchone()
@@ -198,29 +198,37 @@ def star_get_amount(player_id: str) -> dict:
 
     if data:
         return data
+    return False
 
 
 # 특정 유저에게 특정한 수량의 스타 갯수를 DB에 적용시키는 함수.
-def star_set_amount(player_id: str, star_amount: int) -> None:
+def set_user_levelexp(player_id: str, exp: int, level: int) -> None:
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
-    sql = """UPDATE playerlist SET currentStar = %s WHERE playerID = %s"""
+    sql = """UPDATE playerstatic SET totalGetExp = %s, totalLevel = %s WHERE playerlist_playerID = %s"""
 
-    cursor.execute(sql, (player_id, star_amount))
+    cursor.execute(sql, (exp, level, player_id))
     user_db.commit()
     user_db.close()
 
 
-# 여기서부터는 유저의 개인 정보에 대한 함수 (가입 일자, 이메일 등..)
+# 여기서부터는 유저의 개인 정보에 대한 함수 (가입 일자, 이메일, 최고 점수 등)
 # 현재 유저의 프로필을 보여주기 위해 필요한 정보를 가져오는 함수
 def user_profile_info(player_id: str) -> dict:
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
     user_db, cursor = connect_mysql()
 
     # 해당 유저의 전체 등수, 베스트 스코어, 베스트 스테이지 등을 쿼리로 받아 온다. (10명까지만)
-    sql = """SELECT playerJoinDate, playerEmail FROM playerlist WHERE playerID = %s"""
+    sql = """SELECT pbTBL.bestScore, pbTBL.bestStage, plTBL.playerEmail,
+                    plTBL.playerJoinDate, psTBL.totalGetExp, psTBL.totalLevel
+            FROM playerlist plTBL
+                INNER JOIN playerbest pbTBL
+                    ON plTBL.playerID = pbTBL.playerlist_playerID
+                INNER JOIN playerstatic psTBL
+                    ON plTBL.playerID = psTBL.playerlist_playerID
+            WHERE plTBL.playerID = %s"""
 
     cursor.execute(sql, player_id)
     data = cursor.fetchone()

@@ -70,7 +70,7 @@
                         <i class="fa-solid fa-right-to-bracket"></i><span>{{playerJoinDate}}</span>
                     </div>
                     <div class="detail-list">
-                        <i class="fa-solid fa-star"></i><span>{{total_star}} 개</span>
+                        <i class="fa-solid fa-star"></i><span>{{totalExp}} 개</span>
                     </div>
                 </div>
                 <div class="myinfo--option tier">
@@ -79,6 +79,13 @@
                     <span id="tier-percent">상위 <strong>1.52</strong>%</span>
                 </div>
                 <div class="myinfo--option decoration">
+                </div>
+            </div>
+            <div class="main__myinfo--level">
+                <h5># Level. {{totalLevel}}</h5>
+                <div class="myinfo--levelgraph">
+                    <div class="myinfo--progress"></div>
+                    <h5>{{totalExp}} / {{totalLevel ** 2 * 100}}</h5>
                 </div>
             </div>
         </div>
@@ -97,6 +104,7 @@
             </div>
         </footer>
         <script type="module" src="../static/js/tier.js"></script>
+        <script type="module" src="../static/js/levelprogress.js"></script>
     </div>
 </body>
 </html>

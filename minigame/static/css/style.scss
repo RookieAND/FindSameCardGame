@@ -20,6 +20,12 @@ $color-space-reversed: linear-gradient(rgba(98, 0, 122, 0.9) 40%, rgb(37, 0, 170
     -webkit-text-fill-color: transparent;
 }
 
+@mixin space-gradient-vertical {
+    background: linear-gradient(90deg,rgb(48, 0, 223), rgba(154, 0, 192, 0.9));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
 @mixin section-gradient-title {
     color: $color-white;
     text-shadow: 0px 2px rgba(42, 0, 119, 0.5);
