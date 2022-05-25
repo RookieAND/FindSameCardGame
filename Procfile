@@ -1,1 +1,1 @@
-web: gunicorn app:minigame
+web: gunicorn minigame:app

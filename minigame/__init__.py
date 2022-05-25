@@ -7,7 +7,7 @@ from minigame.main import main
 from minigame.utils.email import mail
 
 
-def create_app(config_name='dev'):
+def create_app(config_name='prod'):
     app = Flask(__name__)
     app.config.from_object(config_by_name[config_name])
 
