@@ -25,7 +25,7 @@ async function setProgressBar() {
             clearInterval(prgBar);
         }
         progressBar.style.width = progress + '%';
-        progress += 1;
+        progress += (exp / (level ** 2 * 100));
     }, 10)
 }
 
