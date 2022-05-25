@@ -4,3 +4,5 @@ itsdangerous~=2.1.2
 bcrypt~=3.2.2
 PyMySQL~=1.0.2
 gunicorn~=20.1.0
+email-validator~=1.2.1
+Flask-Mail~=0.9.1
