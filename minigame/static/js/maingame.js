@@ -17,7 +17,7 @@ const gameNextStage = document.querySelector(".main__minigame--next-stage");
 const gameEndLobby = document.querySelector(".main__minigame--end");
 
 const GAME_PLAYTIME = 60000;
-const GAME_BONUSTIME = 15000;
+const GAME_BONUSTIME = 10000;
 
 import flipCard from "./flipcard.js";
 
