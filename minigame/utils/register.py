@@ -38,7 +38,7 @@ def register_check_vaild():
         # 먼저, 해당 계정이 이미 인증되었는지를 체크해야 함.
         if account_is_confirmed(email):
             flash('해당 ID는 이미 다른 유저가 사용 중입니다.')
-            return render_template('register.html', form=form)
+            return jsonify(result='fail', status=200)
         else:
             # 만약 계정을 처음 생성하려고 시도했다면, DB에 새롭게 정보를 적재시킴.
             # 인증 URL이 만료된 케이스의 경우 정보를 적재하지 않고 인증 메일 전송.
@@ -57,7 +57,7 @@ def register_check_vaild():
             return jsonify(result='success', status=200)
 
     flash('회원가입에 필요한 정보를 모두 올바르게 작성해주세요.')
-    return render_template('signup.register')
+    return jsonify(result='fail', status=200)
 
 
 @signup.route('/register/<token>')

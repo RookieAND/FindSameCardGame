@@ -36,8 +36,8 @@ class ProductionConfig(Config):
     MAIL_POST = os.environ.get('MAIL_POST')
     MAIL_USERNAME = os.environ.get('MAIL_USERNAME')
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
-    MAIL_USE_TLS = False
-    MAIL_USE_SSL = True
+    MAIL_USE_TLS = True
+    MAIL_USE_SSL = False
 
 
 config_by_name = dict(
