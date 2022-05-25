@@ -28,6 +28,17 @@ def get_game_result():
     # 게임 종료 후 결과 점수와 유저 개인 최고 기록을 먼저 추출함.
     result = request.get_json()
     result_score, best_score = result['currentScore'], get_user_score(username)['bestScore']
+
+    # 먼저, (얻은 점수 / 100) 만큼의 경험치를 추가하고, 레벨이 올랐는지 체크해야 함.
+    level_info = get_user_levelexp(username)
+    totalLevel, totalExp = level_info['totalLevel'], level_info['totalGetExp']
+    current_exp, needed_exp = totalExp + (result_score // 100), totalLevel ** 2 * 100
+    # 만약 경험치를 획득한 총량이 레벨업 기준보다 높다면, 이를 반영하여 DB 수정.
+    if current_exp >= needed_exp:
+        set_user_levelexp(username, current_exp - needed_exp, totalLevel + 1)
+    else:
+        set_user_levelexp(username, current_exp, totalLevel)
+
     # 만약 최고 기록이 경신되었다면, DB에 새로운 값을 업데이트 해야 함
     if result_score > best_score:
         result_stage = result['currentStage']
@@ -42,6 +53,8 @@ def get_game_result():
 
         # data와 정상 응답 코드인 Http 200 를 동시에 return 시킴.
         return jsonify(data), 200
+
+    return jsonify({}), 200
 
 
 @main.route('/mypage')

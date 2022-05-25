@@ -8,6 +8,7 @@ const scoreDisplay = document.querySelector('.minigame-status.score strong');
 
 const resultStageDisplay = document.querySelector('.minigame-result.stage strong');
 const resultScoreDisplay = document.querySelector('.minigame-result.score strong');
+const resultEarnedExpDisplay = document.querySelector('.minigame-result.earned-exp strong');
 
 const gameStatus = document.querySelector(".main__minigame--status");
 const gameLobby = document.querySelector(".main__minigame--lobby");
@@ -15,7 +16,7 @@ const gameFrame = document.querySelector(".main__minigame--main");
 const gameNextStage = document.querySelector(".main__minigame--next-stage");
 const gameEndLobby = document.querySelector(".main__minigame--end");
 
-const GAME_PLAYTIME = 60000;
+const GAME_PLAYTIME = 3000;
 const GAME_BONUSTIME = 15000;
 
 import flipCard from "./flipcard.js";
@@ -70,6 +71,7 @@ class GameStatue {
             this.isGameStart = false;
             resultScoreDisplay.innerText = this.score.toLocaleString("en-US");
             resultStageDisplay.innerText = this.currentStage;
+            resultEarnedExpDisplay.innerText = parseInt(this.score / 100);
         }
     }
 
@@ -119,10 +121,12 @@ class GameStatue {
     // 만약 최고 기록이 갱신되었다면, 이 기록을 display 에 업데이트 해주어야 함.
     checkNewBestScore = async() => {
         const result = await this.sendResult2Server();
-        [...Object.keys(result)].forEach(data => {
-            const bestDisplayNode = document.querySelector(`.mybest--guide.${data} strong`);
-            bestDisplayNode.innerText = result[data];
-        })
+        if (Object.keys(result).length === 0) {
+            [...Object.keys(result)].forEach(data => {
+                const bestDisplayNode = document.querySelector(`.mybest--guide.${data} strong`);
+                bestDisplayNode.innerText = result[data];
+            })
+        }
     }
 }
 

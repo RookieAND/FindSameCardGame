@@ -234,9 +234,15 @@
 
     text-align: left;
 
+    i {
+        margin-right: 0.5vw;
+        font-size: 2.75vw;
+    }
+
     h5 {
         margin: 0.35vw 2.75vw 0.75vw 2.75vw;
         font-size: 2.75vw;
+        vertical-align: middle;
     }
 }
 
