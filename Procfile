@@ -1,1 +1,1 @@
-web: gunicorn minigame:app
+web: gunicorn minigame:create_app()
