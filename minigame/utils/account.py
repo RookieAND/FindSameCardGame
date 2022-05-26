@@ -37,14 +37,14 @@ def login_validation():
         password = form.password.data
 
         # 해당 ID와 PW를 가진 계정이 있는지, PW가 올바른지를 체크해야 함.
-        result, errcode = account_login(username, password)
-        if result:
-            session['loggedIn'] = True
-            session['username'] = username
-            return redirect(url_for('main.main_page'))
-
         # 로그인에 실패했다면, 에러 코드와 함께 실패했다는 피드백 진행
-        return jsonify(result='fail', errcode=errcode, status=200)
+        result, errcode = account_login(username, password)
+        if not result:
+            return jsonify(result='fail', errcode=errcode, status=200)
+
+        session['loggedIn'] = True
+        session['username'] = username
+        return jsonify(result='success', url=url_for('main.my_page'), status=200)
 
     # 아이디와 비밀번호가 올바르게 적히지 않았다면, 리다이렉트 진행
     return jsonify(result='fail', errcode='001', status=200)
