@@ -29,6 +29,11 @@ javascript, html, scss 를 활용한 웹앱 기반 같은 카드 찾기 게임 �
 
 ## Version History
 
+* 0.4
+    * Add dynamic-login feedback feature.
+    * Add tier system per player's best score.
+    * Fixed some issue related to databases.
+    * Add safety-email verification system.
 * 0.3
     * Add flask back-end part of minigame Web.
     * Add email-verification register system.
