@@ -11,7 +11,7 @@ from flask import Blueprint, session, url_for, redirect, request, render_templat
 signup = Blueprint('signup', __name__, url_prefix='/')
 
 
-@signup.route('/register', methods=['GET', 'POST'])
+@signup.route('/register')
 def register():
     # 이미 로그인이 된 상태라면, 다시 메인 페이지로 돌려 보냄.
     if 'loggedIn' in session:

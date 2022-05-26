@@ -17,8 +17,8 @@
     <div class="container">
         <nav class="main__navbar">
             <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
-            <a href="#"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
-            <a href="#"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
+            <a href="{{ url_for('main.main_page') + '#section-info' }}"><i class="fa-solid fa-circle-question"></i>GuideLine</a>
+            <a href="{{ url_for('main.main_page') + '#section-leader'}}"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
             <a href="{{ url_for('account.login') }}"><i class="fa-solid fa-right-to-bracket"></i></i>Sign in</a>
         </nav>
         <div class="main__background--login">

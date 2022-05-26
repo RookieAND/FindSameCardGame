@@ -17,5 +17,4 @@ def create_app(config_name='prod'):
     app.register_blueprint(signup)
 
     mail.init_app(app)
-
     return app

@@ -188,10 +188,10 @@ body {
 }
 
 .main__information--element .information--guide p {
-  width: 12vw;
-  margin: 0vw auto;
+  width: 13vw;
+  margin: 0.5vw auto 0vw auto;
   font-family: 'NanumSquare', sans-serif;
-  font-size: 1vw;
+  font-size: 1.1vw;
 }
 
 .main__information--element .information--guide:hover {
@@ -775,7 +775,7 @@ body {
 }
 
 .main__login--btn, .main__register--btn {
-  width: 20vw;
+  width: 15vw;
   height: 4vw;
   padding: 0.5vw 0vw;
   position: relative;
@@ -794,8 +794,7 @@ body {
 }
 
 .main__login--btn:hover, .main__register--btn:hover {
-  width: 13vw;
-  font-size: 1.8vw;
+  width: 20vw;
 }
 
 .main__login--btn i, .main__register--btn i {

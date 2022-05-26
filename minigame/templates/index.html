@@ -33,7 +33,7 @@
             <h3>Find the same picture</h3>
             {% if username %}
                 <p>Welcome Back {{username}}! have a good day!</p>
-                <a href="{{ url_for('main.running_game', username=username)}}"><i class="fa-solid fa-play"></i>Play the game</a>
+                <a href="{{ url_for('main.running_game', username=username) + '#section-game'}}"><i class="fa-solid fa-play"></i>Play the game</a>
             {% else %}
                 <p>Welcome to Baik's Minegame Center!</p>
                 <a href="{{ url_for('account.login') }}"><i class="fa-solid fa-right-to-bracket"></i>Join our Center</a>

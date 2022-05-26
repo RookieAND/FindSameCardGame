@@ -33,6 +33,7 @@ def get_game_result():
     level_info = get_user_levelexp(username)
     totalLevel, totalExp = level_info['totalLevel'], level_info['totalGetExp']
     current_exp, needed_exp = totalExp + (result_score // 100), totalLevel ** 2 * 100
+
     # 만약 경험치를 획득한 총량이 레벨업 기준보다 높다면, 이를 반영하여 DB 수정.
     if current_exp >= needed_exp:
         set_user_levelexp(username, current_exp - needed_exp, totalLevel + 1)
@@ -62,11 +63,12 @@ def my_page():
     username = session['username']
 
     total_rank = get_user_rank(username)['ranking']
-    profile_info = user_profile_info(username)
+    user_info = user_profile_info(username)
 
-    best_score, best_stage = profile_info['bestScore'], profile_info['bestStage']
-    playerJoinDate, playerEmail = profile_info['playerJoinDate'], profile_info['playerEmail']
-    totalLevel, totalExp = profile_info['totalLevel'], profile_info['totalGetExp']
+    best_score, best_stage = user_info['bestScore'], user_info['bestStage']
+    playerJoinDate, playerEmail = \
+        user_info['playerJoinDate'].strftime("%Y년 %m월 %d일"), user_info['playerEmail']
+    totalLevel, totalExp = user_info['totalLevel'], user_info['totalGetExp']
 
     return render_template("mypage.html", **locals())
 

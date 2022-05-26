@@ -690,5 +690,7 @@ body {
   background: -webkit-gradient(linear, left top, right top, from(#3000df), to(rgba(154, 0, 192, 0.9)));
   background: linear-gradient(90deg, #3000df, rgba(154, 0, 192, 0.9));
   border-radius: 5vw;
+  -webkit-transition: 1s width cubic-bezier(0.075, 0.82, 0.165, 1);
+  transition: 1s width cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 /*# sourceMappingURL=mypage.css.map */

@@ -21,9 +21,9 @@ export default class flipCard {
             setTimeout(() => card.classList.add('hidden-card'), 500);
         });
 
-        // 점수 : 기본 100 점 + 콤보 ^ 2 * 10 + (스테이지 - 1) * 2 | 시간 : 0.2초 + 콤보 ^ 1.5 * 0.02초
+        // 점수 : 기본 100 점 + 콤보 ^ 2 * 10 + (스테이지 - 1) * 2 | 시간 : 0.25초 + 콤보 ^ 1.5 * 0.025초
         this.gameStatue.score += 100 + (this.gameStatue.combo ^ 2 * 10) + (this.gameStatue.currentStage - 1) * 2;
-        this.gameStatue.timeLeft += 200 + (this.gameStatue.combo  ^ 1.25 * 10);
+        this.gameStatue.timeLeft += 250 + (this.gameStatue.combo  ^ 1.25 * 25);
         this.gameStatue.combo += 1;
 
         scoreDisplay.innerText = this.gameStatue.score.toLocaleString("en-US")
@@ -54,7 +54,7 @@ export default class flipCard {
             // 그렇지 않을 경우, 현재 선택한 카드가 같은지 다른지를 판별해야 함.
             let avoidCardSeleted = (this.selectCard[0] != this.selectCard[1]);
             avoidCardSeleted ? this.checkMatchCard() : this.selectCard[0].classList.remove('flip-card');
-            this.selectCard.length = 0
+            this.selectCard.length = 0;
         }
     }
 

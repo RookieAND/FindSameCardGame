@@ -19,14 +19,8 @@ async function setProgressBar() {
     const prgResult = await getPlayerExp();
     const [exp, level] = Object.values(prgResult);
     
-    let progress = 0;
-    const prgBar = setInterval(() => {
-        if (progress > (exp / (level ** 2 * 100)) * 100) {
-            clearInterval(prgBar);
-        }
-        progressBar.style.width = progress + '%';
-        progress += (exp / (level ** 2 * 100));
-    }, 10)
+    const progress = exp / (level ** 2);
+    progressBar.style.width = progress + '%';
 }
 
 setProgressBar();

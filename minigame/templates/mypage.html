@@ -16,15 +16,15 @@
 <body>
     <div class="container">
         <nav class="main__navbar">
-            <a href="{{ url_for('main.main_page') }}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
-            <a href="#"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
+            <a href="{{ url_for('main.main_page')}}"><i class="fa-solid fa-square-caret-right"></i>Lobby</a>
+            <a href="{{ url_for('main.main_page') + '#section-leader'}}"><i class="fa-solid fa-award"></i></i>Leaderboard</a>
             <a href="{{ url_for('main.my_page') }}"><i class="fa-solid fa-user"></i></i>{{username}}</a>
             <a href="{{ url_for('account.logout') }}"><i class="fa-solid fa-right-from-bracket"></i>log out</a>
         </nav>
         <div class="main__background">
             <h3>Find the same picture</h3>
             <p>Welcome Back {{username}}! have a good day!</p>
-            <a href="{{ url_for('main.running_game', username=username)}}"><i class="fa-solid fa-play"></i>Play the game</a>
+            <a href="{{ url_for('main.running_game', username=username) + '#section-game'}}"><i class="fa-solid fa-play"></i>Play the game</a>
         </div>
         <div class="main__statistic">
             <div class="main__darken-gradient"></div>

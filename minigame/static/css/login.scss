@@ -322,7 +322,7 @@
 }
 
 .main__login--btn, .main__register--btn  {
-    width: 20vw;
+    width: 15vw;
     height: 4vw;
     padding: 0.5vw 0vw;
 
@@ -341,8 +341,7 @@
     transition: all 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 
     &:hover {
-        width: 13vw;
-        font-size: 1.8vw;
+        width: 20vw;
     }
 
     i {

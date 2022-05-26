@@ -39,7 +39,7 @@ def account_exist(player_id: str) -> bool:
     return result['is_exists']
 
 
-def account_login(player_id: str, player_pw: str) -> bool:
+def account_login(player_id: str, player_pw: str) -> tuple[bool, str]:
     user_db, cursor = connect_mysql()
     # 해당 ID와 PW를 가진 유저 목록이 있는지를 체크해야 함.
     sql = """SELECT isConfirmed, playerPW FROM playerlist WHERE playerID = %s"""
@@ -47,14 +47,21 @@ def account_login(player_id: str, player_pw: str) -> bool:
     account_info = cursor.fetchone()
     user_db.close()
 
-    # 먼저, 해당 ID에 맞는 계정 정보가 존재하는지, 인증된 계정인지를 먼저 체크해야 한다.
-    if account_info and account_info['isConfirmed']:
-        # DB에서 꺼낸 PW를 byte로 변경한 값과, 입력받은 PW를 byte로 변경한 값이 일치하는지 체크
-        player_pw = player_pw.encode('utf-8')
-        check_password = bcrypt.checkpw(player_pw, account_info['playerPW'].encode('utf-8'))
-        # 만약 해당 PW가 서로 일치한다면 True, 일치하지 않는다면 False를 리턴.
-        return check_password
-    return False
+    # 먼저, 입력받은 정보에 대한 계정이 존재하는지를 체크해야 함.
+    if not account_info:
+        return False, '003'
+
+    # 그 다음, 입력 받은 정보에 대한 계정이 인증되었는지를 체크해야 함.
+    if not account_info['isConfirmed']:
+        return False, '004'
+
+    # DB에 내장된 값과 입력받은 PW를 암호화한 값이 동일한지를 대조.
+    player_pw = player_pw.encode('utf-8')
+    check_password = bcrypt.checkpw(player_pw, account_info['playerPW'].encode('utf-8'))
+    # 만약 해당 PW가 서로 일치한다면 True, 일치하지 않는다면 False를 리턴.
+    if check_password:
+        return True, '000'
+    return False, '002'
 
 
 def account_register(player_id: str, player_pw: str, email: str) -> None:
@@ -68,11 +75,11 @@ def account_register(player_id: str, player_pw: str, email: str) -> None:
     user_db.close()
 
 
-def account_is_confirmed(email: str) -> None:
+def account_is_confirmed(email: str) -> bool:
     user_db, cursor = connect_mysql()
 
     # 새롭게 입력받은 정보를 정리하여 INSERT 로 계정을 추가함.
-    sql = """SELECT isConfirmed FROM playerlist WHERE playerEmail = %s"""
+    sql = "SELECT isConfirmed FROM playerlist WHERE playerEmail = %s"
     cursor.execute(sql, email)
     is_confirmed = cursor.fetchone()
     user_db.close()
@@ -185,7 +192,7 @@ def get_leaderboard() -> dict:
 
 # 여기서부터는 레벨과 관련된 함수를 기입하는 곳 (레벨 업 여부, 현재 보유 경험치 및 레벨 체크)
 # 현재 유저가 보유한 경험치의 수량을 얻어오는 함수.
-def get_user_levelexp(player_id: str) -> dict:
+def get_user_levelexp(player_id: str) -> dict | bool:
     # MySQL 의 Data 를 Dict 형태로 반환 시키는 DictCursor 사용
     user_db, cursor = connect_mysql()
 
