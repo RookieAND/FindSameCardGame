@@ -30,7 +30,9 @@ async function checkisVaild(event) {
 
     if (validResult.result == 'fail') {
         loginFeedBack.innerText = feedBackMsg[validResult.errcode];
+        return;
     }
+    // 로그인에 성공했다면, 리다이렉트를 진행시킴.
     loginFeedBack.innerText = feedBackMsg['000'];
     window.location.href = validResult.url;
 }
