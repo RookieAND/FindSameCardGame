@@ -5,14 +5,14 @@
 ## Description [프로젝트 소개]
 
 javascript, html, scss 를 활용한 웹앱 기반 같은 카드 찾기 게임 사이트입니다.
-현재 flask 프레임워크로 백엔드 파트를 구축 중이며, 추후 heroku에 서비스 될 예정입니다.
+https://findsamecard.herokuapp.com/ [현재 heroku에서 서비스 중입니다.]
 
 
 ## Dependencies
 
 * javascript
-* HTML5
-* CSS3, SCSS
+* HTML5, CSS3, SCSS
+* Python (Flask)
 
 ## Game System [시스템 안내]
 
