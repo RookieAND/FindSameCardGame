@@ -5,7 +5,7 @@
 ## Description [프로젝트 소개]
 
 javascript, html, scss 를 활용한 웹앱 기반 같은 카드 찾기 게임 사이트입니다.
-https://findsamecard.herokuapp.com/ [현재 heroku에서 서비스 중입니다.]
+~~https://findsamecard.herokuapp.com/~~ [Heroku 유료 전환으로 사용 중단]
 
 
 ## Dependencies
